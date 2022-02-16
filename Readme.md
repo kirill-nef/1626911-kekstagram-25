@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 - Студент: [Кирилл Нефедов](https://up.htmlacademy.ru/javascript/25/user/1626911).
-- Наставник: [Глеб Клецков] (https://htmlacademy.ru/profile/id1487865).
+- Наставник: [Глеб Клецков](https://htmlacademy.ru/profile/id1487865).
 
 ---
 
