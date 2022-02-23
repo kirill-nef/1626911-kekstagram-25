@@ -13,15 +13,13 @@ function getRandomInt(min, max) {
 }
 getRandomInt(10, 100);
 
-// Посчитать длину текста
-function checkStringLength (letterMax) {
-  const letter = document.querySelector('.test-js').textContent.length;
-
-  if (letter < letterMax) {
+// Проверка количества символов в комментарии
+function checkStringLength (inputString, letterMax) {
+  if (inputString.length <= letterMax) {
     return true;
   } else {
     return false;
   }
-
 }
-checkStringLength(140);
+
+checkStringLength('string to test', 140);
