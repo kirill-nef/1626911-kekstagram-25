@@ -1,17 +1,16 @@
-// Вывод рандомного числа, взято с ресурса:
-// https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-function getRandomInt(min, max) {
-  max = Math.floor(max + 1);
-  min = Math.ceil(min);
+// Функция взята из интернета и доработана
+// Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
 
-  if (max < min) {
-    max = Math.floor(max - 1);
-    min = Math.ceil(min + 1);
-  }
+function getRandomPositiveInteger (a, b) {
+  const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
+  const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
 
-  return Math.floor(Math.random() * (max - min)) + min;
+  const result = Math.random() * (upper - lower + 1) + lower;
+
+  return Math.floor(result);
 }
-getRandomInt(10, 100);
+console.log(getRandomPositiveInteger(1, 11));
+
 
 // Проверка количества символов в комментарии
 function checkStringLength (inputString, letterMax) {
@@ -23,3 +22,4 @@ function checkStringLength (inputString, letterMax) {
 }
 
 checkStringLength('string to test', 140);
+
