@@ -52,7 +52,7 @@ const createArray = (generateValue) => {
   for (let i = 0; i <= generateValue - 1; i++) {
     createData[i] = {};
     createData[i].id = i + 1;
-    createData[i].url = 'photos/' + i + '.jpg';
+    createData[i].url = `photos/${  i  }.jpg`;
     createData[i].likes = getRandomPositiveInteger(15, 200);
     createData[i].description = USERS_DESCRIPTIONS[getRandomPositiveInteger(0, USERS_DESCRIPTIONS.length - 1)];
     createData[i].avatar = `img/avatar-${  getRandomPositiveInteger(1, 6)  }.svg`;
