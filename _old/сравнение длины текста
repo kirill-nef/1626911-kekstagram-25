@@ -1,0 +1,12 @@
+// Посчитать длину текста
+function checkStringLength (letterMax) {
+  const letter = document.querySelector('.test-js').textContent.length;
+
+  if (letter < letterMax) {
+    return true;
+  } else {
+    return false;
+  }
+
+}
+checkStringLength(140);
