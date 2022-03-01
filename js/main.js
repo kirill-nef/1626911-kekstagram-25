@@ -8,7 +8,7 @@ function getRandomPositiveInteger (a, b) {
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 }
-//console.log(getRandomPositiveInteger(0, 25));
+getRandomPositiveInteger(0, 25);
 
 // Проверка количества символов в комментарии
 function checkStringLength (inputString, letterMax) {
@@ -18,7 +18,7 @@ function checkStringLength (inputString, letterMax) {
     return false;
   }
 }
-//console.log(checkStringLength('string to test', 140));
+checkStringLength('string to test', 140);
 
 // ============================= ДЗ module4-task1 =============================
 
@@ -62,4 +62,4 @@ const createArray = (generateValue) => {
 
   return createData;
 };
-// console.log(createArray(25));
+createArray(25);
