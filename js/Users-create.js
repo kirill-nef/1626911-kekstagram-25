@@ -1,6 +1,6 @@
 
-import {getRandomPositiveInteger} from './random-integer.js';
-import {USERS_NAMES, USERS_COMMENTS, USERS_DESCRIPTIONS} from './data-users.js';
+import {getRandomPositiveInteger} from './getRandomPositiveInteger.js';
+import {USERS_NAMES, USERS_COMMENTS, USERS_DESCRIPTIONS} from './Users-data.js';
 
 // Функция по созданию массива с пользователями и данными
 const createArrayUsers = (generateValue) => {
