@@ -1,5 +1,7 @@
 
+// Функция получения рандомного числа
 import {getRandomPositiveInteger} from './getRandomPositiveInteger.js';
+// Массив данных пользователей
 import {USERS_NAMES, USERS_COMMENTS, USERS_DESCRIPTIONS} from './Users-data.js';
 
 // Функция по созданию массива с пользователями и данными
