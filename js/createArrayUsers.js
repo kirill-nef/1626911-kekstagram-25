@@ -2,7 +2,7 @@
 // Функция получения рандомного числа
 import {getRandomPositiveInteger} from './getRandomPositiveInteger.js';
 // Массив данных пользователей
-import {USERS_NAMES, USERS_COMMENTS, USERS_DESCRIPTIONS} from './Users-data.js';
+import {USERS_NAMES, USERS_COMMENTS, USERS_DESCRIPTIONS} from './data-createArrayUsers.js';
 
 // Функция по созданию массива с пользователями и данными
 const createArrayUsers = (generateValue) => {

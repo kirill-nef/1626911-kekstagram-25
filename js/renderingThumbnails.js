@@ -23,6 +23,5 @@ const renderingThumbnails = function (img, comments, likes) {
   listPictures.appendChild(taskPicture);
 };
 
-//renderingThumbnails('/photos/2.jpg', 'lorem ipsuuuuum test', '1000');
-
 export {renderingThumbnails};
+
