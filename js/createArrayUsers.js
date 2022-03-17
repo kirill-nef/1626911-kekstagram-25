@@ -3,11 +3,10 @@ import {getRandomPositiveInteger} from './getRandomPositiveInteger.js';
 // Массив данных пользователей
 import {USERS_NAMES, USERS_COMMENTS, USERS_DESCRIPTIONS} from './data-createArrayUsers.js';
 
+// Функция по созданию массива с пользователями и данными
 const createDataUsers = [];
 
-// Функция по созданию массива с пользователями и данными
 const createArrayUsers = (generateValue) => {
-
   for (let i = 0; i <= generateValue - 1; i++) {
     createDataUsers[i] = {};
     createDataUsers[i].id = i + 1;
@@ -18,10 +17,9 @@ const createArrayUsers = (generateValue) => {
     createDataUsers[i].comment = USERS_COMMENTS[getRandomPositiveInteger(0, USERS_COMMENTS.length - 1)];
     createDataUsers[i].name = USERS_NAMES[getRandomPositiveInteger(0, USERS_NAMES.length - 1)];
   }
-
-  // return createDataUsers;
 };
 
+// Вызов функции создания массива
 createArrayUsers(25);
 
 export {createDataUsers};

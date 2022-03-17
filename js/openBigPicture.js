@@ -15,31 +15,31 @@ const bigPictureComments = bigPicture.querySelector('.comments-count');
 // Поиск описания к большой фотографии
 const bigPictureDescription = bigPicture.querySelector('.social__caption');
 // Поиск body
-const body = document.querySelector('body');
+const body = document.body;
 
 // Функция открытия большой фотографии
-const openBigPicture = function (numberPicture) {
+const openBigPicture = function (pictureIndex) {
   // Поиск лайков в миниатюрной картинке для подставляния в большую
-  const miniPictureLikes = miniPicture[numberPicture].querySelector('.picture__likes');
+  const miniPictureLikes = miniPicture[pictureIndex].querySelector('.picture__likes');
   // Поиск комментов в миниатюрной картинке для подставляния в большую
-  const miniPictureComments = miniPicture[numberPicture].querySelector('.picture__comments');
+  const miniPictureComments = miniPicture[pictureIndex].querySelector('.picture__comments');
 
   // Обработчик по клику на миниатбру
-  miniPicture[numberPicture].addEventListener('click', () => {
+  miniPicture[pictureIndex].addEventListener('click', () => {
     // Меняем ссылку картинки
-    bigPictureSrc.src = `./photos/${  numberPicture + 1 }.jpg`;
+    bigPictureSrc.src = `./photos/${  pictureIndex + 1 }.jpg`;
     // Вставляем лайки количественно
     bigPictureLikes.textContent = (miniPictureLikes.textContent);
     // Вставляем комменты количественно
     bigPictureComments.textContent = (miniPictureComments.textContent);
     // Вставляем описание к большой фотографии
-    bigPictureDescription.textContent = (createDataUsers[numberPicture].description);
+    bigPictureDescription.textContent = (createDataUsers[pictureIndex].description);
     // Снимаем класс hidden для открытия большой картинки
     bigPicture.classList.remove('hidden');
     // Отключаем скролл фона
     body.classList.add('modal-open');
     // Функция добавления комментария
-    addComment(numberPicture);
+    addComment(pictureIndex);
   });
 };
 

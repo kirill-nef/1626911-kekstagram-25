@@ -11,11 +11,11 @@ const addComment = function (numberComment) {
 
   // Задаем src для картинки
   const taskCommentsImg = taskComments.querySelector('img');
-  taskCommentsImg.src = (createDataUsers[numberComment].avatar);
-  taskCommentsImg.alt = (createDataUsers[numberComment].name);
+  taskCommentsImg.src = createDataUsers[numberComment].avatar;
+  taskCommentsImg.alt = createDataUsers[numberComment].name;
 
   const taskCommentsText = taskComments.querySelector('p');
-  taskCommentsText.textContent = (createDataUsers[numberComment].comment);
+  taskCommentsText.textContent = createDataUsers[numberComment].comment;
 
   // Пушим на страницу
   commentsList.appendChild(taskComments);
