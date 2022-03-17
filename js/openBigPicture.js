@@ -55,12 +55,13 @@ cancellButton.addEventListener('click', () => {
 });
 
 // Закрытие окна с большой фотографией по крестику по ESC
-window.onkeydown = function(event) {
-  if (event.keyCode === 27) {
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
     bigPicture.classList.add('hidden');
     body.classList.remove('modal-open');
   }
-};
+});
 
 // Скрытие .social__comment-count и .comments-loader
 bigPicture.querySelector('.social__comment-count').classList.add('hidden');
