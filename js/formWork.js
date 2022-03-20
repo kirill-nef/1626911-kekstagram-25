@@ -11,24 +11,24 @@ const cancellButton = imgUpload.querySelector('.cancel');
 const imgUploadInput = document.querySelector('.img-upload__input');
 
 
-const textHashtags = document.querySelector('.text__hashtags')
-const pristineHashtags = new Pristine(textHashtags);
+// const textHashtags = document.querySelector('.text__hashtags');
+// const pristineHashtags = new Pristine(textHashtags);
 
-const textDescription = document.querySelector('.text__hashtags')
-const pristineComments = new Pristine(textDescription);
+// const textDescription = document.querySelector('.text__hashtags');
+// const pristineComments = new Pristine(textDescription);
 
-pristineHashtags.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+// pristineHashtags.addEventListener('submit', (evt) => {
+//   evt.preventDefault();
 
-  const isValid = pristineHashtags.validate();
+//   const isValid = pristineHashtags.validate();
 
-  if (isValid) {
-    console.log('Валид');
-  }
-  else {
-    console.log('Невалид');
-  }
-});
+//   if (isValid) {
+//     console.log('Валид');
+//   }
+//   else {
+//     console.log('Невалид');
+//   }
+// });
 
 
 
