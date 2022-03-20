@@ -4,5 +4,5 @@ import './createArrayUsers.js';
 import './renderingThumbnails.js';
 // 3 Функция открытия большой картинки
 import './openBigPicture.js';
-
-
+// 4 Модуль работы с формой
+import './formWork.js';

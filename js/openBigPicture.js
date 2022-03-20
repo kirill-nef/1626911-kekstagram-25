@@ -9,14 +9,12 @@ const bigPicture = document.querySelector('.big-picture');
 // Поиск картинки в блоке большой фотографии
 const bigPictureImage = bigPicture.querySelector('img');
 // Поиск кнопки закрытия в блоке большой фотографии
-const cancellButton = bigPicture.querySelector('.big-picture__cancel');
+const cancellButton = bigPicture.querySelector('.cancel');
 // Поиск лайков в блоке большой фотографии
 const bigPictureLikes = bigPicture.querySelector('.likes-count');
 const bigPictureCommentsСount = bigPicture.querySelector('.comments-count');
 // Поиск описания к большой фотографии
 const bigPictureDescription = bigPicture.querySelector('.social__caption');
-// Поиск body
-const body = document.body;
 
 
 // Функция очистки данных у окна с большой фотографией
@@ -37,7 +35,7 @@ const onPopupEscapeKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     bigPicture.classList.add('hidden');
-    body.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
     closePopup();
   }
 };
@@ -69,7 +67,7 @@ const openBigPicture = function (pictureIndex) {
     // Снимаем класс hidden для открытия большой картинки
     bigPicture.classList.remove('hidden');
     // Отключаем скролл фона
-    body.classList.add('modal-open');
+    document.body.classList.add('modal-open');
     // Функция добавления комментария
     addComment(pictureIndex);
     // Подключение функции закрытия большого окна по нажатию Escape
@@ -85,7 +83,7 @@ for (let i = 0; i < miniPicture.length; i++) {
 // Закрытие окна с большой фотографией по крестику
 cancellButton.addEventListener('click', () => {
   bigPicture.classList.add('hidden');
-  body.classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
   closePopup();
 });
 
