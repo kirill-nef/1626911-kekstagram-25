@@ -17,42 +17,37 @@ const bigPictureCommentsСount = bigPicture.querySelector('.comments-count');
 // Поиск описания к большой фотографии
 const bigPictureDescription = bigPicture.querySelector('.social__caption');
 
-
-// Функция очистки данных у окна с большой фотографией
-function clearDataBigPicture () {
-  // Очистка комментариев под фото
-  const bigPictureCommentsItem = bigPicture.querySelectorAll('.social__comment');
-  for (let j = 0; j < bigPictureCommentsItem.length; j++) {
-    bigPictureCommentsItem[j].remove();
-  }
-  bigPictureLikes.textContent = '';
-  bigPictureImage.src = '';
-  bigPictureImage.alt = 'Фотография пользователя';
-  bigPictureDescription.textContent = '';
-}
-
-// Закрытие окна с большой фотографией по крестику
+// Закрытие окна с большой фотографией по клику на крестик
 cancellButton.addEventListener('click', () => {
-  bigPicture.classList.add('hidden');
-  document.body.classList.remove('modal-open');
   closePopup();
 });
 
 // Функция для закрытия окна с большой фотографией по нажатию Escape
 const onPopupEscapeKeydown = (evt) => {
   if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    bigPicture.classList.add('hidden');
-    document.body.classList.remove('modal-open');
     closePopup();
   }
 };
 
-// Удаление обработчика функции закрытия по Escape
+// Закрытие и удаление обработчика закрывания
 function closePopup () {
+  bigPicture.classList.add('hidden');
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscapeKeydown);
-  // Очистить данных окна с большой картинки после закрытия
   clearDataBigPicture();
+
+  // Функция очистки данных у окна с большой фотографией
+  function clearDataBigPicture () {
+    // Очистка комментариев под фото
+    const bigPictureCommentsItem = bigPicture.querySelectorAll('.social__comment');
+    for (let j = 0; j < bigPictureCommentsItem.length; j++) {
+      bigPictureCommentsItem[j].remove();
+    }
+    bigPictureLikes.textContent = '';
+    bigPictureImage.src = '';
+    bigPictureImage.alt = 'Фотография пользователя';
+    bigPictureDescription.textContent = '';
+  }
 }
 
 // Функция открытия большой фотографии
