@@ -1,5 +1,5 @@
 // Функция получения рандомного числа
-import {getRandomPositiveInteger} from './getRandomPositiveInteger.js';
+import {getRandomPositiveInteger} from './util.js';
 
 // Блок в который будем вставлять шаблоны template
 const listPictures = document.querySelector('.pictures');

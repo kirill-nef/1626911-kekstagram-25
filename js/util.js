@@ -8,4 +8,7 @@ const getRandomPositiveInteger = (a, b) => {
   return Math.floor(result);
 };
 
-export {getRandomPositiveInteger};
+// Проверка на нажатие кнопки Escape, возвращает true/false
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomPositiveInteger, isEscapeKey};
