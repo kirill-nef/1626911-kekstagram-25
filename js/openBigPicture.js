@@ -12,6 +12,7 @@ const bigPictureImage = bigPicture.querySelector('img');
 const cancellButton = bigPicture.querySelector('.cancel');
 // Поиск лайков в блоке большой фотографии
 const bigPictureLikes = bigPicture.querySelector('.likes-count');
+// Поиск комментов в блоке большой фотографии
 const bigPictureCommentsСount = bigPicture.querySelector('.comments-count');
 // Поиск описания к большой фотографии
 const bigPictureDescription = bigPicture.querySelector('.social__caption');
@@ -29,6 +30,13 @@ function clearDataBigPicture () {
   bigPictureImage.alt = 'Фотография пользователя';
   bigPictureDescription.textContent = '';
 }
+
+// Закрытие окна с большой фотографией по крестику
+cancellButton.addEventListener('click', () => {
+  bigPicture.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  closePopup();
+});
 
 // Функция для закрытия окна с большой фотографией по нажатию Escape
 const onPopupEscapeKeydown = (evt) => {
@@ -59,11 +67,11 @@ const openBigPicture = function (pictureIndex) {
     // Меняем ссылку картинки
     bigPictureImage.src = `./photos/${  pictureIndex + 1 }.jpg`;
     // Вставляем лайки количественно
-    bigPictureLikes.textContent = (miniPictureLikes.textContent);
+    bigPictureLikes.textContent = miniPictureLikes.textContent;
     // Вставляем комменты количественно
-    bigPictureCommentsСount.textContent = (miniPictureComments.textContent);
+    bigPictureCommentsСount.textContent = miniPictureComments.textContent;
     // Вставляем описание к большой фотографии
-    bigPictureDescription.textContent = (createDataUsers[pictureIndex].description);
+    bigPictureDescription.textContent = createDataUsers[pictureIndex].description;
     // Снимаем класс hidden для открытия большой картинки
     bigPicture.classList.remove('hidden');
     // Отключаем скролл фона
@@ -79,13 +87,6 @@ const openBigPicture = function (pictureIndex) {
 for (let i = 0; i < miniPicture.length; i++) {
   openBigPicture(i);
 }
-
-// Закрытие окна с большой фотографией по крестику
-cancellButton.addEventListener('click', () => {
-  bigPicture.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-  closePopup();
-});
 
 // Скрытие .social__comment-count и .comments-loader (Согласно ТЗ по ДЗ 7)
 bigPicture.querySelector('.social__comment-count').classList.add('hidden');

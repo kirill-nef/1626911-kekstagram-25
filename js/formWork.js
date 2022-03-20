@@ -10,31 +10,24 @@ const cancellButton = imgUpload.querySelector('.cancel');
 // Инпут с данными
 const imgUploadInput = document.querySelector('.img-upload__input');
 
+// Валидация формы
+const uploadForm = document.querySelector('.img-upload__form');
+const pristine = new Pristine(uploadForm);
 
-// const textHashtags = document.querySelector('.text__hashtags');
-// const pristineHashtags = new Pristine(textHashtags);
+uploadForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
 
-// const textDescription = document.querySelector('.text__hashtags');
-// const pristineComments = new Pristine(textDescription);
+  const isValid = pristine.validate();
 
-// pristineHashtags.addEventListener('submit', (evt) => {
-//   evt.preventDefault();
+  if (isValid) {
+    console.log('Валид');
+  }
+  else {
+    console.log('Невалид');
+  }
+});
 
-//   const isValid = pristineHashtags.validate();
-
-//   if (isValid) {
-//     console.log('Валид');
-//   }
-//   else {
-//     console.log('Невалид');
-//   }
-// });
-
-
-
-
-
-
+//const re = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/;
 
 // Функция для закрытия окна с большой фотографией по нажатию Escape
 const onPopupEscapeKeydown = (evt) => {
