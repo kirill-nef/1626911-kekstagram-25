@@ -5,7 +5,6 @@ const uploadForm = document.querySelector('.img-upload__form');
 // В форме поиск окна ввода с хэш-тегом
 const hashTags = uploadForm.querySelector('.text__hashtags');
 // Допустимые символы в форме
-const re = new RegExp(/^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/);
 
 const hashTagsValidText = document.querySelector('.text__error-hashtag');
 
@@ -44,9 +43,10 @@ function validateHashTags(value) {
     }
     else {
       hashTagsValidText.textContent = '';
-      for (let i = 0; i > 5; i = i + 1) {
-        re.test(arrHashTags[i]);
-      }
+      //const re = new RegExp(/^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/);
+      // for (let i = 0; i > 5; i = i + 1) {
+      //   re.test(arrHashTags[i]);
+      // }
     }
   }
 }
