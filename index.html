@@ -32,7 +32,7 @@
             <form class="img-upload__form" id="upload-select-image" action="https://25.javascript.pages.academy/kekstagram" method="post" enctype="multipart/form-data" autocomplete="off">
               <!-- Изначальное состояние поля для загрузки изображения -->
               <fieldset class="img-upload__start">
-                <input type="file" id="upload-file" class="img-upload__input visually-hidden" name="filename" required />
+                <input type="file" id="upload-file" class="img-upload__input visually-hidden" name="filename" />
                 <label for="upload-file" class="img-upload__label img-upload__control">Загрузить</label>
               </fieldset>
 
@@ -112,8 +112,20 @@
 
                   <!-- Добавление хэш-тегов и комментария к изображению -->
                   <fieldset class="img-upload__text text">
-                    <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег" />
-                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..." maxlength="140" ></textarea>
+
+                    <label class="text__el text__el--hashtags">
+                      <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег" value="#test"/>
+                      <!-- Информер о валидации хэштега -->
+                      <div class="pristine-error text__error text__error-hashtag"></div>
+                    </label>
+
+                    <label class="text__el text__el--description">
+                      <textarea class="text__description" name="description" placeholder="Ваш комментарий..." minlength="2" maxlength="140"
+                        data-pristine-minlength-message="Минимальная длина 2 символа"
+                        data-pristine-maxlength-message="Максимальная длина 140 символов"></textarea>
+                    <!-- В этом месте пристин создает автоматом блок -->
+                    </label>
+
                   </fieldset>
 
                   <!-- Кнопка для отправки данных на сервер -->

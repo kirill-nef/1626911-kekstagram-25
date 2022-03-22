@@ -669,17 +669,24 @@ main {
   border: none;
 }
 
+/* .text-valid {
+font-size: 10px;
+
+  margin-top: 2px;
+} */
+
 .text__hashtags {
   width: 450px;
 
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
   padding: 5px 10px;
 
   font-family: "Open Sans", "Arial", sans-serif;
   font-weight: 400;
   color: #000000;
 
+  border: none;
   border-radius: 5px;
 }
 
@@ -688,12 +695,14 @@ main {
   height: 100px;
 
   margin: 0 auto;
+  margin-bottom: -9px;
   padding: 15px 10px;
 
   font-family: "Open Sans", "Arial", sans-serif;
   font-weight: 400;
   color: #000000;
 
+  border: none;
   border-radius: 5px;
 }
 
@@ -1402,4 +1411,20 @@ main {
 
 .hidden {
   display: none;
+}
+
+.text__el {
+  position: relative;
+}
+
+.text__error {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+
+    width: 100%;
+
+    transform: translateX(-50%);
+    color: #a7a7a7;
+    text-align: center;
 }

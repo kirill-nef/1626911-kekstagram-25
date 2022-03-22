@@ -2,6 +2,7 @@
 
 // Импорт функции закрытия окна по escape
 import {isEscapeKey} from './util.js';
+import './formWorkValidation.js';
 
 // Поиск окна выгрузки
 const imgUpload = document.querySelector('.img-upload__overlay');
@@ -9,25 +10,6 @@ const imgUpload = document.querySelector('.img-upload__overlay');
 const cancellButton = imgUpload.querySelector('.cancel');
 // Инпут с данными
 const imgUploadInput = document.querySelector('.img-upload__input');
-
-// Валидация формы
-const uploadForm = document.querySelector('.img-upload__form');
-const pristine = new Pristine(uploadForm);
-
-uploadForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-
-  const isValid = pristine.validate();
-
-  if (isValid) {
-    console.log('Валид');
-  }
-  else {
-    console.log('Невалид');
-  }
-});
-
-//const re = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/;
 
 // Функция для закрытия окна с большой фотографией по нажатию Escape
 const onPopupEscapeKeydown = (evt) => {
