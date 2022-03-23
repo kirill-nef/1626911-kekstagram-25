@@ -48,6 +48,8 @@ function validateHashTags(value) {
       //   re.test(arrHashTags[i]);
       // }
     }
+    console.log('123');
+    return true;
   }
 }
 
