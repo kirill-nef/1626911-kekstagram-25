@@ -15,21 +15,20 @@ const imgUploadInput = document.querySelector('.img-upload__input');
 const onPopupEscapeKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    imgUpload.classList.add('hidden');
-    document.body.classList.remove('modal-open');
     closePopup();
   }
 };
 
 // Удаление обработчика функции закрытия по Escape
 function closePopup () {
+  imgUpload.classList.add('hidden');
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscapeKeydown);
 }
 
 // Функция закрытия окна выгрузки по крестику
 cancellButton.addEventListener('click', () => {
-  imgUpload.classList.add('hidden');
-  document.body.classList.remove('modal-open');
+  closePopup();
 });
 
 // Открытие окна выгрузки при изменении инпута
