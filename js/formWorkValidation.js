@@ -7,6 +7,7 @@ const hashTags = uploadForm.querySelector('.text__hashtags');
 // Место вывода ошибки о валидации хэштега
 const hashTagsValidText = document.querySelector('.text__error-hashtag');
 
+// Конфиг Пристин
 const pristine = new Pristine(uploadForm, {
   // укажем класс элемента, в котором нужно вывести ошибку
   classTo: 'text__el--description',
@@ -26,11 +27,10 @@ uploadForm.addEventListener('submit', (evt) => {
   }
 });
 
+// Валидаця на повторения и количество хэштегов
 function validateHashTags(value) {
   const arrHashTags = value.split(' ');
   const uniqArrHashTags = new Set(arrHashTags);
-
-
   if (arrHashTags.length > 5) {
     hashTagsValidText.textContent = 'Хэш-тегов не может быть более 5';
     return false;
@@ -46,9 +46,9 @@ function validateHashTags(value) {
     }
   }
 
+  // Валидация хэштега на правильность ввода
   const re = new RegExp('^#[A-Za-zА-Яа-яЁё0-9]{1,20}$');
   for (let i = 0; i < arrHashTags.length; i++) {
-
     if (hashTags.value.length > 0) {
       const curentHashtag = arrHashTags[i];
       const hashCheck = re.test(curentHashtag);
@@ -66,7 +66,6 @@ function validateHashTags(value) {
       hashTagsValidText.textContent = '';
       return true;
     }
-
   }
   return true;
 }

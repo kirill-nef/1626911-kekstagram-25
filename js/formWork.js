@@ -24,6 +24,7 @@ function closePopup () {
   imgUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscapeKeydown);
+  // imgUploadInput.value = '';
 }
 
 // Функция закрытия окна выгрузки по крестику
