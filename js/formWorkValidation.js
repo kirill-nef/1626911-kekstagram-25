@@ -18,12 +18,8 @@ const pristine = new Pristine(uploadForm, {
 });
 
 uploadForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  const isValid = pristine.validate();
-  if (isValid) {
-    return true;
-  } else {
-    return false;
+  if (!pristine.validate()) {
+    evt.preventDefault();
   }
 });
 
