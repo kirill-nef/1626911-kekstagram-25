@@ -5,17 +5,17 @@ import {isEscapeKey} from './util.js';
 // Поиск всех миниатюр
 const miniPicture = document.querySelectorAll('.picture');
 // Поиск блока с большой фотографией
-const bigPicture = document.querySelector('.big-picture');
+const bigPictureBlock = document.querySelector('.big-picture');
 // Поиск картинки в блоке большой фотографии
-const bigPictureImage = bigPicture.querySelector('img');
+const bigPicture = bigPictureBlock.querySelector('img');
 // Поиск кнопки закрытия в блоке большой фотографии
-const cancellButton = bigPicture.querySelector('.cancel');
+const cancellButton = bigPictureBlock.querySelector('.cancel');
 // Поиск лайков в блоке большой фотографии
-const bigPictureLikes = bigPicture.querySelector('.likes-count');
+const bigPictureLikes = bigPictureBlock.querySelector('.likes-count');
 // Поиск комментов в блоке большой фотографии
-const bigPictureCommentsСount = bigPicture.querySelector('.comments-count');
+const bigPictureCommentsСount = bigPictureBlock.querySelector('.comments-count');
 // Поиск описания к большой фотографии
-const bigPictureDescription = bigPicture.querySelector('.social__caption');
+const bigPictureDescription = bigPictureBlock.querySelector('.social__caption');
 
 // Закрытие окна с большой фотографией по клику на крестик
 cancellButton.addEventListener('click', () => {
@@ -31,7 +31,7 @@ const onPopupEscapeKeydown = (evt) => {
 
 // Закрытие и удаление обработчика закрывания
 function closePopup () {
-  bigPicture.classList.add('hidden');
+  bigPictureBlock.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscapeKeydown);
   clearDataBigPicture();
@@ -39,13 +39,13 @@ function closePopup () {
   // Функция очистки данных у окна с большой фотографией
   function clearDataBigPicture () {
     // Очистка комментариев под фото
-    const bigPictureCommentsItem = bigPicture.querySelectorAll('.social__comment');
+    const bigPictureCommentsItem = bigPictureBlock.querySelectorAll('.social__comment');
     for (let j = 0; j < bigPictureCommentsItem.length; j++) {
       bigPictureCommentsItem[j].remove();
     }
     bigPictureLikes.textContent = '';
-    bigPictureImage.src = '';
-    bigPictureImage.alt = 'Фотография пользователя';
+    bigPicture.src = '';
+    bigPicture.alt = 'Фотография пользователя';
     bigPictureDescription.textContent = '';
   }
 }
@@ -57,10 +57,10 @@ const openBigPicture = function (pictureIndex) {
   // Поиск комментов в миниатюрной картинке для подставляния в большую
   const miniPictureComments = miniPicture[pictureIndex].querySelector('.picture__comments');
 
-  // Обработчик по клику на миниатбру для открытия юольшой картинки
+  // Обработчик по клику на миниатюру для открытия большой картинки
   miniPicture[pictureIndex].addEventListener('click', () => {
     // Меняем ссылку картинки
-    bigPictureImage.src = `./photos/${  pictureIndex + 1 }.jpg`;
+    bigPicture.src = `./photos/${  pictureIndex + 1 }.jpg`;
     // Вставляем лайки количественно
     bigPictureLikes.textContent = miniPictureLikes.textContent;
     // Вставляем комменты количественно
@@ -68,7 +68,7 @@ const openBigPicture = function (pictureIndex) {
     // Вставляем описание к большой фотографии
     bigPictureDescription.textContent = createDataUsers[pictureIndex].description;
     // Снимаем класс hidden для открытия большой картинки
-    bigPicture.classList.remove('hidden');
+    bigPictureBlock.classList.remove('hidden');
     // Отключаем скролл фона
     document.body.classList.add('modal-open');
     // Функция добавления комментария
@@ -84,5 +84,5 @@ for (let i = 0; i < miniPicture.length; i++) {
 }
 
 // Скрытие .social__comment-count и .comments-loader (Согласно ТЗ по ДЗ 7)
-bigPicture.querySelector('.social__comment-count').classList.add('hidden');
-bigPicture.querySelector('.comments-loader').classList.add('hidden');
+bigPictureBlock.querySelector('.social__comment-count').classList.add('hidden');
+bigPictureBlock.querySelector('.comments-loader').classList.add('hidden');
