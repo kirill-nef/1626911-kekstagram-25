@@ -11,9 +11,12 @@ const cancellButton = imgUpload.querySelector('.cancel');
 // Инпут с данными
 const imgUploadInput = document.querySelector('.img-upload__input');
 
+const fieldHashtags = document.querySelector('.text__hashtags');
+const fieldComment = document.querySelector('.text__description');
+
 // Функция для закрытия окна с большой фотографией по нажатию Escape
 const onPopupEscapeKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && evt.target !== fieldHashtags && evt.target !== fieldComment) {
     evt.preventDefault();
     closePopup();
   }
@@ -24,7 +27,7 @@ function closePopup () {
   imgUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscapeKeydown);
-  // imgUploadInput.value = '';
+  imgUploadInput.value = '';
 }
 
 // Функция закрытия окна выгрузки по крестику

@@ -16,6 +16,8 @@ const bigPictureLikes = bigPictureBlock.querySelector('.likes-count');
 const bigPictureCommentsСount = bigPictureBlock.querySelector('.comments-count');
 // Поиск описания к большой фотографии
 const bigPictureDescription = bigPictureBlock.querySelector('.social__caption');
+// Поиск поля комментариев
+const fieldComments = document.querySelector('.social__footer-text');
 
 // Закрытие окна с большой фотографией по клику на крестик
 cancellButton.addEventListener('click', () => {
@@ -24,7 +26,7 @@ cancellButton.addEventListener('click', () => {
 
 // Функция для закрытия окна с большой фотографией по нажатию Escape
 const onPopupEscapeKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && evt.target !== fieldComments) {
     closePopup();
   }
 };
