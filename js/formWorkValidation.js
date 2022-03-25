@@ -30,10 +30,6 @@ uploadForm.addEventListener('submit', (evt) => {
 // Валидаця на повторения и количество хэштегов
 function validateHashTags(value) {
   const arrHashTags = value.toLowerCase().split(' ');
-
-  console.log(arrHashTags);
-
-
   const uniqArrHashTags = new Set(arrHashTags);
   if (arrHashTags.length > 5) {
     hashTagsValidText.textContent = 'Хэш-тегов не может быть более 5';
