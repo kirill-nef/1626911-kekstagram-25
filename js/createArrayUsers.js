@@ -1,5 +1,5 @@
 // Функция получения рандомного числа
-import {getRandomPositiveInteger} from './getRandomPositiveInteger.js';
+import {getRandomPositiveInteger} from './util.js';
 // Массив данных пользователей
 import {USERS_NAMES, USERS_COMMENTS, USERS_DESCRIPTIONS} from './data-createArrayUsers.js';
 

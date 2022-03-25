@@ -29,10 +29,10 @@
         <section class="img-upload">
           <div class="img-upload__wrapper">
             <h2 class="img-upload__title visually-hidden">Загрузка фотографии</h2>
-            <form class="img-upload__form" id="upload-select-image" method="post" enctype="multipart/form-data" autocomplete="off">
+            <form class="img-upload__form" id="upload-select-image" action="https://25.javascript.pages.academy/kekstagram" method="post" enctype="multipart/form-data" autocomplete="off">
               <!-- Изначальное состояние поля для загрузки изображения -->
               <fieldset class="img-upload__start">
-                <input type="file" id="upload-file" class="img-upload__input visually-hidden" name="filename" required />
+                <input type="file" id="upload-file" class="img-upload__input visually-hidden" name="filename" required/>
                 <label for="upload-file" class="img-upload__label img-upload__control">Загрузить</label>
               </fieldset>
 
@@ -112,8 +112,20 @@
 
                   <!-- Добавление хэш-тегов и комментария к изображению -->
                   <fieldset class="img-upload__text text">
-                    <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег" />
-                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>
+
+                    <label class="text__el text__el--hashtags">
+                      <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег"/>
+                      <!-- Информер о валидации хэштега -->
+                      <div class="pristine-error text__error text__error-hashtag"></div>
+                    </label>
+
+                    <label class="text__el text__el--description">
+                      <textarea class="text__description" name="description" placeholder="Ваш комментарий..." minlength="2" maxlength="140"
+                        data-pristine-minlength-message="Минимальная длина 2 символа"
+                        data-pristine-maxlength-message="Максимальная длина 140 символов"></textarea>
+                    <!-- В этом месте пристин создает автоматом блок -->
+                    </label>
+
                   </fieldset>
 
                   <!-- Кнопка для отправки данных на сервер -->
@@ -133,17 +145,17 @@
         <div class="big-picture__preview">
           <!-- Просмотр изображения -->
           <div class="big-picture__img">
-            <img src="img/logo-background-3.jpg" alt="Девушка в купальнике" width="600" height="600" />
+            <img src="" alt="Фотография пользователя" width="600" height="600" />
           </div>
 
           <!-- Информация об изображении. Подпись, комментарии, количество лайков -->
           <div class="big-picture__social social">
             <div class="social__header">
               <img class="social__picture" src="img/avatar-1.svg" alt="Аватар автора фотографии" width="35" height="35" />
-              <p class="social__caption">Тестим новую камеру! =)</p>
+              <p class="social__caption"></p>
               <p class="social__likes">
                 Нравится
-                <span class="likes-count">356</span>
+                <span class="likes-count"></span>
               </p>
             </div>
 
@@ -154,14 +166,7 @@
               комментариев
             </div>
             <ul class="social__comments">
-              <li class="social__comment">
-                <img class="social__picture" src="img/avatar-4.svg" alt="Аватар комментатора фотографии" width="35" height="35" />
-                <p class="social__text">Мега фото! Просто обалдеть. Как вам так удалось?</p>
-              </li>
-              <li class="social__comment">
-                <img class="social__picture" src="img/avatar-3.svg" alt="Аватар комментатора фотографии" width="35" height="35" />
-                <p class="social__text">Да это фоташоп!!!!!!!!</p>
-              </li>
+
             </ul>
 
             <!-- Кнопка для загрузки новой порции комментариев -->
@@ -242,8 +247,9 @@
           <p class="social__text"></p>
         </li>
     </template>
-
-    <script src="js/main.js" type="module"></script>
+    
+    <script src="./pristine/pristine.min.js"></script>
+    <script src="./js/main.js" type="module"></script>
   
   </body>
 

@@ -2,16 +2,7 @@
 import './createArrayUsers.js';
 // 2 Функция создания миниатюр на странице
 import './renderingThumbnails.js';
-// 3 Функция проверки длины комментария
-import {checkStringLength} from './checkStringLength.js';
-// 4 Функция получения рандомного числа
-import {getRandomPositiveInteger} from './getRandomPositiveInteger.js';
-// 5 Функция открытия большой картинки
+// 3 Функция открытия большой картинки
 import './openBigPicture.js';
-
-
-// 3 Вызов Функции проверки длины комментария
-checkStringLength('Test', 18);
-
-// 4 Вызов Функции получения рандомного числа
-getRandomPositiveInteger(0, 500);
+// 4 Модуль работы с формой
+import './formWork.js';

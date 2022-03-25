@@ -1,21 +1,56 @@
 import {createDataUsers} from './createArrayUsers.js';
 import {addComment} from './commentList.js';
+import {isEscapeKey} from './util.js';
 
 // Поиск всех миниатюр
 const miniPicture = document.querySelectorAll('.picture');
 // Поиск блока с большой фотографией
-const bigPicture = document.querySelector('.big-picture');
+const bigPictureBlock = document.querySelector('.big-picture');
 // Поиск картинки в блоке большой фотографии
-const bigPictureSrc = bigPicture.querySelector('img');
+const bigPicture = bigPictureBlock.querySelector('img');
 // Поиск кнопки закрытия в блоке большой фотографии
-const cancellButton = bigPicture.querySelector('.big-picture__cancel');
+const cancellButton = bigPictureBlock.querySelector('.cancel');
 // Поиск лайков в блоке большой фотографии
-const bigPictureLikes = bigPicture.querySelector('.likes-count');
-const bigPictureComments = bigPicture.querySelector('.comments-count');
+const bigPictureLikes = bigPictureBlock.querySelector('.likes-count');
+// Поиск комментов в блоке большой фотографии
+const bigPictureCommentsСount = bigPictureBlock.querySelector('.comments-count');
 // Поиск описания к большой фотографии
-const bigPictureDescription = bigPicture.querySelector('.social__caption');
-// Поиск body
-const body = document.body;
+const bigPictureDescription = bigPictureBlock.querySelector('.social__caption');
+// Поиск поля комментариев
+const fieldComments = document.querySelector('.social__footer-text');
+
+// Закрытие окна с большой фотографией по клику на крестик
+cancellButton.addEventListener('click', () => {
+  closePopup();
+});
+
+// Функция для закрытия окна с большой фотографией по нажатию Escape
+const onPopupEscapeKeydown = (evt) => {
+  if (isEscapeKey(evt) && evt.target !== fieldComments) {
+    closePopup();
+  }
+};
+
+// Закрытие и удаление обработчика закрывания
+function closePopup () {
+  bigPictureBlock.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onPopupEscapeKeydown);
+  clearDataBigPicture();
+
+  // Функция очистки данных у окна с большой фотографией
+  function clearDataBigPicture () {
+    // Очистка комментариев под фото
+    const bigPictureCommentsItem = bigPictureBlock.querySelectorAll('.social__comment');
+    for (let j = 0; j < bigPictureCommentsItem.length; j++) {
+      bigPictureCommentsItem[j].remove();
+    }
+    bigPictureLikes.textContent = '';
+    bigPicture.src = '';
+    bigPicture.alt = 'Фотография пользователя';
+    bigPictureDescription.textContent = '';
+  }
+}
 
 // Функция открытия большой фотографии
 const openBigPicture = function (pictureIndex) {
@@ -24,22 +59,24 @@ const openBigPicture = function (pictureIndex) {
   // Поиск комментов в миниатюрной картинке для подставляния в большую
   const miniPictureComments = miniPicture[pictureIndex].querySelector('.picture__comments');
 
-  // Обработчик по клику на миниатбру
+  // Обработчик по клику на миниатюру для открытия большой картинки
   miniPicture[pictureIndex].addEventListener('click', () => {
     // Меняем ссылку картинки
-    bigPictureSrc.src = `./photos/${  pictureIndex + 1 }.jpg`;
+    bigPicture.src = `./photos/${  pictureIndex + 1 }.jpg`;
     // Вставляем лайки количественно
-    bigPictureLikes.textContent = (miniPictureLikes.textContent);
+    bigPictureLikes.textContent = miniPictureLikes.textContent;
     // Вставляем комменты количественно
-    bigPictureComments.textContent = (miniPictureComments.textContent);
+    bigPictureCommentsСount.textContent = miniPictureComments.textContent;
     // Вставляем описание к большой фотографии
-    bigPictureDescription.textContent = (createDataUsers[pictureIndex].description);
+    bigPictureDescription.textContent = createDataUsers[pictureIndex].description;
     // Снимаем класс hidden для открытия большой картинки
-    bigPicture.classList.remove('hidden');
+    bigPictureBlock.classList.remove('hidden');
     // Отключаем скролл фона
-    body.classList.add('modal-open');
+    document.body.classList.add('modal-open');
     // Функция добавления комментария
     addComment(pictureIndex);
+    // Подключение функции закрытия большого окна по нажатию Escape
+    document.addEventListener('keydown', onPopupEscapeKeydown);
   });
 };
 
@@ -48,21 +85,6 @@ for (let i = 0; i < miniPicture.length; i++) {
   openBigPicture(i);
 }
 
-// Закрытие окна с большой фотографией по крестику
-cancellButton.addEventListener('click', () => {
-  bigPicture.classList.add('hidden');
-  body.classList.remove('modal-open');
-});
-
-// Закрытие окна с большой фотографией по крестику по ESC
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
-    bigPicture.classList.add('hidden');
-    body.classList.remove('modal-open');
-  }
-});
-
-// Скрытие .social__comment-count и .comments-loader
-bigPicture.querySelector('.social__comment-count').classList.add('hidden');
-bigPicture.querySelector('.comments-loader').classList.add('hidden');
+// Скрытие .social__comment-count и .comments-loader (Согласно ТЗ по ДЗ 7)
+bigPictureBlock.querySelector('.social__comment-count').classList.add('hidden');
+bigPictureBlock.querySelector('.comments-loader').classList.add('hidden');
