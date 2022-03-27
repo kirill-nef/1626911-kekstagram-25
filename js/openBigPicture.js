@@ -1,6 +1,8 @@
-import {createDataUsers} from './createArrayUsers.js';
-import {addComment} from './commentList.js';
 import {isEscapeKey} from './util.js';
+import {PHOTO_DESCRIPTIONS, USERS_COMMENTS} from './data.js';
+import {arrayPicture} from './createArrayPicture.js';
+import {createDataUsers} from './createArrayUsers.js';
+import {downloadComments} from './downloadComments.js';
 
 // Поиск всех миниатюр
 const miniPicture = document.querySelectorAll('.picture');
@@ -52,6 +54,25 @@ function closePopup () {
   }
 }
 
+
+function counterComment (count) {
+  const socialCommentCount = bigPictureBlock.querySelector('.social__comment-count');
+  const commentsLoader = bigPictureBlock.querySelector('.comments-loader');
+
+  if (count > 5) {
+    socialCommentCount.classList.remove('hidden');
+    commentsLoader.classList.remove('hidden');
+  } else {
+    socialCommentCount.classList.add('hidden');
+    commentsLoader.classList.add('hidden');
+  }
+}
+
+// Поиск блока комментариев
+const commentsList = document.querySelector('.social__comments');
+// Поиск в template блок comments
+const commentsItem = document.querySelector('#comments').content.querySelector('.social__comment');
+
 // Функция открытия большой фотографии
 const openBigPicture = function (pictureIndex) {
   // Поиск лайков в миниатюрной картинке для подставляния в большую
@@ -68,13 +89,38 @@ const openBigPicture = function (pictureIndex) {
     // Вставляем комменты количественно
     bigPictureCommentsСount.textContent = miniPictureComments.textContent;
     // Вставляем описание к большой фотографии
-    bigPictureDescription.textContent = createDataUsers[pictureIndex].description;
+    bigPictureDescription.textContent = PHOTO_DESCRIPTIONS[arrayPicture[pictureIndex].descriptionNum];
     // Снимаем класс hidden для открытия большой картинки
     bigPictureBlock.classList.remove('hidden');
     // Отключаем скролл фона
     document.body.classList.add('modal-open');
-    // Функция добавления комментария
-    addComment(pictureIndex);
+
+    // Процедура публикации комментариев для фотографии //
+    // Получам длину массива всех комментариев у данной фотографии
+    const currentArrLength = arrayPicture[pictureIndex].commentsArr.length;
+
+    for (let i = 0; i < currentArrLength; i++) {
+      // Делаем полный клон блока
+      const taskComments = commentsItem.cloneNode(true);
+      // Ищем аватар пользователя в разметке
+      const taskCommentsImg = taskComments.querySelector('img');
+      // Ищем поле комментария пользователя в разметке
+      const taskCommentsText = taskComments.querySelector('p');
+      // Получаем уникальные сопоставленные номера user + commen сгенерированные для каждой картинки
+      const currentUser = arrayPicture[pictureIndex].commentsArr[i].user;
+      const currentComment = arrayPicture[pictureIndex].commentsArr[i].comment;
+      // Берем информацию о пользователе из data.js и записываем в аватарку
+      taskCommentsImg.src = createDataUsers[currentUser].avatar;
+      taskCommentsImg.alt = createDataUsers[currentUser].name;
+      // Вставляем комментарий в разметку
+      taskCommentsText.textContent = USERS_COMMENTS[currentComment];
+      // Публикуем на страницу
+      commentsList.appendChild(taskComments);
+      // Функция счета комментариев, при необходимости появится кнопка подгрузки
+      counterComment(bigPictureCommentsСount.textContent);
+      // Функция подкачки фотографи
+      downloadComments();
+    }
     // Подключение функции закрытия большого окна по нажатию Escape
     document.addEventListener('keydown', onPopupEscapeKeydown);
   });
@@ -84,7 +130,3 @@ const openBigPicture = function (pictureIndex) {
 for (let i = 0; i < miniPicture.length; i++) {
   openBigPicture(i);
 }
-
-// Скрытие .social__comment-count и .comments-loader (Согласно ТЗ по ДЗ 7)
-bigPictureBlock.querySelector('.social__comment-count').classList.add('hidden');
-bigPictureBlock.querySelector('.comments-loader').classList.add('hidden');
