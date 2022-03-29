@@ -12,41 +12,24 @@ const commentsList = document.querySelector('.social__comments');
 // Поиск в template блок comments
 const commentsItem = document.querySelector('#comments').content.querySelector('.social__comment');
 // Количество первоначально загруженных комментов
-const countPreload = 2;
+const countPreload = 5;
 // Индекс начального и конечного числа загрузки комментария
-let minComentsPreload = 0;
-let maxComentsPreload = countPreload;
+let fromComentsPreload = 0;
+let toComentsPreload = countPreload;
 
 // Поиск кнопки загрузки комментов
 const buttonDownloadClick = document.querySelector('.comments-loader');
 
 // Функция установки начальных значений, вызывается при закрытии окна боьшой фотографии
 function defaultCommentsPreload () {
-  minComentsPreload = 0;
-  maxComentsPreload = countPreload;
+  fromComentsPreload = 0;
+  toComentsPreload = countPreload;
 }
 
 // Функция подкачки 5(countPreload) комментариев
 function downloadComments (pictureIndex) {
-  // Создание обработчика на клик
   buttonDownloadClick.addEventListener('click', () => {
-
-    // Число, которое получится после нажатия на кнопку
-    const lengthComments = maxComentsPreload + countPreload;
-    // Длина комментариев в массиве
-    const lengthArrComments = arrayPicture[pictureIndex].commentsArr.length;
-
-    minComentsPreload = minComentsPreload + countPreload;
-
-    // Если число привысит количество в массиве
-    if (lengthComments > lengthArrComments) {
-      maxComentsPreload = lengthArrComments;
-    }
-    else {
-      maxComentsPreload = maxComentsPreload + countPreload;
-    }
-
-    loaderComment(pictureIndex, minComentsPreload, maxComentsPreload);
+    loaderComment(pictureIndex, fromComentsPreload, toComentsPreload);
   });
 }
 
@@ -70,18 +53,19 @@ function counterComment (pictureIndex) {
     // Подставляем число всех коментов в счетчик
     сommentsСount.textContent = count;
     // Вызов функции генерации комменатрия при начальном открытии окна
-    loaderComment(pictureIndex, minComentsPreload, maxComentsPreload);
+    loaderComment(pictureIndex, fromComentsPreload, toComentsPreload);
   } else {
     // Выключаем показ счетчика
     socialCommentCount.classList.add('hidden');
     commentsLoader.classList.add('hidden');
     // Вызов функции генерации комменатрия при начальном открытии окна
-    loaderComment(pictureIndex, minComentsPreload, count);
+    loaderComment(pictureIndex, fromComentsPreload, count);
   }
 }
 
 // Фукция публикации комментов из массива
 function loaderComment (pictureIndex, fromIndex, toIndex) {
+  const count = arrayPicture[pictureIndex].commentsCount;
   for (let i = fromIndex; i < toIndex; i++) {
     // Делаем полный клон блока комментов
     const taskComments = commentsItem.cloneNode(true);
@@ -101,6 +85,27 @@ function loaderComment (pictureIndex, fromIndex, toIndex) {
     commentsList.appendChild(taskComments);
     // Функция подкачки фотографи
   }
+
+  //console.log(count + ' длина общая');
+  //console.log(fromIndex + ' ' + toIndex + ' поступившие индексы');
+
+  const xxx = toComentsPreload + countPreload;
+  //console.log(xxx + ' xxx');
+
+  fromComentsPreload = toComentsPreload;
+
+  if (count > xxx) {
+    toComentsPreload = toComentsPreload + countPreload;
+  }
+  else {
+    toComentsPreload = count;
+  }
+
+  if (fromComentsPreload === toComentsPreload) {
+    bigPictureSocial.querySelector('.comments-loader').classList.add('hidden');
+  }
+
+  //console.log(fromComentsPreload + ' ' + toComentsPreload + ' выходные данные');
 }
 
 export {counterComment, defaultCommentsPreload};

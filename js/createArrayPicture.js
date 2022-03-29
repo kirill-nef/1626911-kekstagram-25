@@ -18,7 +18,7 @@ const createPicture = (index) => {
     // Описание фотографии (получаем любое описание из data.js)
     arrayPicture[i].descriptionNum = getRandomPositiveInteger(0, PHOTO_DESCRIPTIONS.length - 1);
     // Колличество комментариев у фото
-    arrayPicture[i].commentsCount = getRandomPositiveInteger(1, 20);
+    arrayPicture[i].commentsCount = getRandomPositiveInteger(4, 22);
 
     // Из полученного числа комментариев в массив занесем порядковые номера рандомных коменатриев из data.js
     arrayPicture[i].commentsArr = [];
