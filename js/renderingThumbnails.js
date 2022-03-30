@@ -1,5 +1,4 @@
-// Функция получения рандомного числа
-import {getRandomPositiveInteger} from './util.js';
+import { arrayPicture } from './createArrayPicture.js';
 
 // Блок в который будем вставлять шаблоны template
 const listPictures = document.querySelector('.pictures');
@@ -8,7 +7,7 @@ const templatePicture = document.querySelector('#picture').content;
 // Поиск внутри template блок picture
 const templatePictureItem = templatePicture.querySelector('.picture');
 // Сколько картинок создать
-const THUMBNAILS = 25;
+const THUMBNAILS = arrayPicture.length;
 
 // Функция создания миниатюр на странице
 const renderingThumbnails = function (img, comments, likes) {
@@ -27,10 +26,10 @@ const renderingThumbnails = function (img, comments, likes) {
   listPictures.appendChild(taskPicture);
 };
 
-for (let i = 1; i < THUMBNAILS + 1; i++) {
-  const IMG = `./photos/${  i  }.jpg`;
-  const COMMENTS = getRandomPositiveInteger(15, 50);
-  const LIKES = getRandomPositiveInteger(100, 500);
+for (let i = 0; i < THUMBNAILS; i++) {
+  const IMG = arrayPicture[i].src;
+  const COMMENTS = arrayPicture[i].commentsCount;
+  const LIKES = arrayPicture[i].likesCount;
   renderingThumbnails(IMG, COMMENTS, LIKES);
 }
 
