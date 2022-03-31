@@ -413,6 +413,8 @@ main {
 }
 
 .scale {
+  display: flex;
+
   margin: 0;
   padding: 10px;
 
@@ -433,6 +435,7 @@ main {
 
   background-color: rgba(0, 0, 0, 0.6);
   border: 0;
+  outline: 1px solid #ffffff;
 }
 
 .scale__control:hover,
@@ -470,9 +473,34 @@ main {
 
   font-size: 16px;
   color: #ffffff;
+  padding-right: 24px;
 
-  border: solid rgba(255, 255, 255, 0.5);
-  border-width: 0 2px;
+  text-align: right;
+}
+
+.scale__control-box {
+  position: relative;
+}
+
+.scale__control-box::after {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  content: '%';
+
+  width: 15px;
+  height: 15px;
+
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.scale__control--value::-webkit-inner-spin-button,
+.scale__control--value::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 
 .scale__control--bigger {
