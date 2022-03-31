@@ -413,11 +413,29 @@ main {
 }
 
 .scale {
+  display: flex;
   margin: 0;
   padding: 10px;
 
   font-size: 0;
   border: 0;
+}
+
+.scale__control-box {
+  position: relative;
+}
+
+.scale__control-box::after {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  content: '%';
+
+  width: 15px;
+  height: 15px;
+
+  font-size: 16px;
+  color: #ffffff;
 }
 
 .scale__control {
@@ -433,6 +451,7 @@ main {
 
   background-color: rgba(0, 0, 0, 0.6);
   border: 0;
+  outline: 1px solid #ffffff;
 }
 
 .scale__control:hover,
@@ -471,7 +490,6 @@ main {
   font-size: 16px;
   color: #ffffff;
 
-  border: solid rgba(255, 255, 255, 0.5);
   border-width: 0 2px;
 }
 
@@ -520,6 +538,7 @@ main {
   display: block;
   max-width: 600px;
   max-height: 600px;
+  transition: linear 0.15s;
 }
 
 

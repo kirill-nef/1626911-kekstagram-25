@@ -8,5 +8,3 @@ import './renderingThumbnails.js';
 import './openBigPicture.js';
 // 5 Модуль работы с формой
 import './formWork.js';
-// 6 Модуль подкачки комментов, если их больше 5ти
-import './downloadComments.js';
