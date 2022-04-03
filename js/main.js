@@ -8,3 +8,5 @@ import './renderingThumbnails.js';
 import './openBigPicture.js';
 // 5 Модуль работы с формой
 import './formWork.js';
+// 6 Модуль работы со слайдером
+import './formWorkSlider.js';
