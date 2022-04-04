@@ -3,6 +3,7 @@
 // Импорт функции закрытия окна по escape
 import {isEscapeKey} from './util.js';
 import './formWorkValidation.js';
+import './formWorkScale.js';
 
 // Поиск окна выгрузки
 const imgUpload = document.querySelector('.img-upload__overlay');
