@@ -1,3 +1,5 @@
+import { effectConfig } from './data.js';
+
 // Бокс под слайдер
 const boxSlider = document.querySelector('.img-upload__effect-level');
 // Поле слайдера
@@ -47,76 +49,10 @@ function controlSlider () {
 // Функция подгрузки настроек для фильтров. Вызывается при изменении активной радио кнопки.
 function sliderSetting () {
   boxSlider.classList.remove('hidden');
-  // Для эффекта «Хром» — filter: grayscale(0..1) с шагом 0.1;
-  if (chekedValue === 'chrome') {
-    effectName = 'grayscale';
-    method = '';
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 1
-      },
-      start: 1,
-      step: 0.1
-    });
-    return '';
-  }
-  // Для эффекта «Сепия» — filter: sepia(0..1) с шагом 0.1;
-  if (chekedValue === 'sepia') {
-    effectName = 'sepia';
-    method = '';
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 1
-      },
-      start: 1,
-      step: 0.1
-    });
-    return '';
-  }
-  // Для эффекта «Марвин» — filter: invert(0..100%) с шагом 1%;
-  if (chekedValue === 'marvin') {
-    effectName = 'invert';
-    method = '%';
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 100
-      },
-      start: 100,
-      step: 1
-    });
-    return '';
-  }
-  // Для эффекта «Фобос» — filter: blur(0..3px) с шагом 0.1px;
-  if (chekedValue === 'phobos') {
-    effectName = 'blur';
-    method = 'px';
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 3
-      },
-      start: 3,
-      step: 0.1
-    });
-    return '';
-  }
-  // Для эффекта «Зной» — filter: brightness(1..3) с шагом 0.1;
-  if (chekedValue === 'heat') {
-    effectName = 'brightness';
-    method = '';
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 1,
-        max: 3
-      },
-      start: 3,
-      step: 0.1
-    });
-    return '';
-  }
+  const effect = effectConfig[chekedValue];
+  effectName = effect.effectProperty;
+  method = effect.unit;
+  sliderElement.noUiSlider.updateOptions(effect.sliderConfig);
   // Если нет эффекта
   if (chekedValue === 'none') {
     imgUploadPreview.style.filter = 'none';
