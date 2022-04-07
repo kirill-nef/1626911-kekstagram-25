@@ -2,10 +2,14 @@
 
 // Поиск формы
 const uploadForm = document.querySelector('.img-upload__form');
-// В форме поиск окна ввода с хэш-тегом
-const hashTags = uploadForm.querySelector('.text__hashtags');
+// В форме поиск окна ввода с хэш-тегом и комментом
+const fieldHashtags = uploadForm.querySelector('.text__hashtags');
+const fieldComment = uploadForm.querySelector('.text__description');
+
 // Место вывода ошибки о валидации хэштега
 const hashTagsValidText = document.querySelector('.text__error-hashtag');
+// Место вывода ошибки о валидации комментария
+const descriptionValidText = document.querySelector('.text__error-description');
 
 // Конфиг Пристин
 const pristine = new Pristine(uploadForm, {
@@ -45,7 +49,7 @@ function validateHashTags(value) {
   // Валидация хэштега на правильность ввода
   const re = new RegExp('^#[A-Za-zА-Яа-яЁё0-9]{1,20}$');
   for (let i = 0; i < arrHashTags.length; i++) {
-    if (hashTags.value.length > 0) {
+    if (fieldHashtags.value.length > 0) {
       const curentHashtag = arrHashTags[i];
       const hashCheck = re.test(curentHashtag);
       if (hashCheck === false) {
@@ -66,4 +70,6 @@ function validateHashTags(value) {
   return true;
 }
 
-pristine.addValidator(hashTags, validateHashTags, 'Ошибка валидации');
+pristine.addValidator(fieldHashtags, validateHashTags, 'Ошибка валидации');
+
+export {hashTagsValidText, descriptionValidText, fieldComment, fieldHashtags};

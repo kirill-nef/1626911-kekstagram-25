@@ -2,8 +2,10 @@
 
 // Импорт функции закрытия окна по escape
 import {isEscapeKey} from './util.js';
-import './formWorkValidation.js';
-import './formWorkScale.js';
+// Закрытие слайдера
+import  {closeSlider} from './formWorkSlider.js';
+// Поля вывода ошибок по инпутам
+import  {hashTagsValidText, descriptionValidText, fieldComment, fieldHashtags} from './formWorkValidation.js';
 
 // Поиск окна выгрузки
 const imgUpload = document.querySelector('.img-upload__overlay');
@@ -12,8 +14,7 @@ const cancellButton = imgUpload.querySelector('.cancel');
 // Инпут с данными
 const imgUploadInput = document.querySelector('.img-upload__input');
 
-const fieldHashtags = document.querySelector('.text__hashtags');
-const fieldComment = document.querySelector('.text__description');
+const uploadImg = document.querySelector('.img-upload__preview img');
 
 // Функция для закрытия окна с большой фотографией по нажатию Escape
 const onPopupEscapeKeydown = (evt) => {
@@ -29,6 +30,10 @@ function closePopup () {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscapeKeydown);
   imgUploadInput.value = '';
+  hashTagsValidText.textContent = '';
+  descriptionValidText.textContent = '';
+  uploadImg.style.transform = 'none';
+  closeSlider();
 }
 
 // Функция закрытия окна выгрузки по крестику
