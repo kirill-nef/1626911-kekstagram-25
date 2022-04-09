@@ -15,6 +15,8 @@ const fieldComment = uploadForm.querySelector('.text__description');
 const hashTagsValidText = document.querySelector('.text__error-hashtag');
 // Место вывода ошибки о валидации комментария
 const descriptionValidText = document.querySelector('.text__error-description');
+// Кнопка публикации
+const submitButton = document.querySelector('.img-upload__submit');
 
 // Конфиг Пристин
 const pristine = new Pristine(uploadForm, {
@@ -26,16 +28,29 @@ const pristine = new Pristine(uploadForm, {
   errorTextClass: 'text__error',
 });
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Публикую...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
 const setUserForSubmit = (onSuccess) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
       const formData = new FormData(evt.target);
+      blockSubmitButton();
       sendData(onSuccess, showAlert, formData);
+      unblockSubmitButton();
     }
     else {
       showAlert('Проверьте правильность введенных данных!', 6000);
+      unblockSubmitButton();
     }
   });
 };
