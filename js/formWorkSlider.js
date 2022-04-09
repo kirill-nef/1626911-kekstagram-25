@@ -1,4 +1,4 @@
-import { effectConfig } from './data.js';
+import { effectConfig } from './formWorkData.js';
 
 // Бокс под слайдер
 const boxSlider = document.querySelector('.img-upload__effect-level');
@@ -23,7 +23,7 @@ noUiSlider.create(sliderElement, {
     min: 0,
     max: 100,
   },
-  start: 80,
+  start: 100,
   step: 1,
   connect: 'lower',
 });

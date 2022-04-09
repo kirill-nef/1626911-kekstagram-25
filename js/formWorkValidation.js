@@ -1,5 +1,10 @@
 // Модуль валидация формы
 
+// Функция вывода сообщения об ошибке
+import {showAlert} from './util.js';
+// Функция отправки формы
+import {sendData} from './api.js';
+
 // Поиск формы
 const uploadForm = document.querySelector('.img-upload__form');
 // В форме поиск окна ввода с хэш-тегом и комментом
@@ -21,11 +26,19 @@ const pristine = new Pristine(uploadForm, {
   errorTextClass: 'text__error',
 });
 
-uploadForm.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {
+const setUserForSubmit = (onSuccess) => {
+  uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-  }
-});
+    const isValid = pristine.validate();
+    if (isValid) {
+      const formData = new FormData(evt.target);
+      sendData(onSuccess, showAlert, formData);
+    }
+    else {
+      showAlert('Проверьте правильность введенных данных!', 6000);
+    }
+  });
+};
 
 // Валидаця на повторения и количество хэштегов
 function validateHashTags(value) {
@@ -72,4 +85,4 @@ function validateHashTags(value) {
 
 pristine.addValidator(fieldHashtags, validateHashTags, 'Ошибка валидации');
 
-export {hashTagsValidText, descriptionValidText, fieldComment, fieldHashtags};
+export {hashTagsValidText, descriptionValidText, fieldComment, fieldHashtags, setUserForSubmit};
