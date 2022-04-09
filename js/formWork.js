@@ -6,8 +6,6 @@ import {isEscapeKey} from './util.js';
 import  {closeSlider} from './formWorkSlider.js';
 // Поля вывода ошибок по инпутам
 import  {hashTagsValidText, descriptionValidText, fieldComment, fieldHashtags} from './formWorkValidation.js';
-// Подключение модуля изменения размера картинки
-import './formWorkScale.js';
 
 // Поиск окна выгрузки
 const imgUpload = document.querySelector('.img-upload__overlay');

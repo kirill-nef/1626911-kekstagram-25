@@ -28,11 +28,11 @@ const pristine = new Pristine(uploadForm, {
   errorTextClass: 'text__error',
 });
 
+// Кнопки
 const blockSubmitButton = () => {
   submitButton.disabled = true;
   submitButton.textContent = 'Публикую...';
 };
-
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
   submitButton.textContent = 'Опубликовать';

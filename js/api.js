@@ -11,7 +11,7 @@ const getData = () => {
   fetch('https://25.javascript.pages.academy/kekstagram/data')
     .catch(() => {
       showAlert('Не удалось загрузить данные с сервера, попробуйте обновить зайти позднее!', 16000);
-      return fetch;
+      return false;
     })
     .then((respone) => respone.json())
     .then((photoData) => {
