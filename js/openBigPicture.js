@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {photoDataArray} from './api.js';
+import {photoDataArray} from './main.js';
 
 import {counterComment, defaultCommentsPreload} from './downloadComments.js';
 
@@ -47,11 +47,6 @@ function closePopup () {
     bigPicture.src = '';
     bigPicture.alt = 'Фотография пользователя';
     bigPictureDescription.textContent = '';
-
-    // while (container.firstChild) {
-    // container.removeChild(container.firstChild);
-    // }
-
   }
 
   defaultCommentsPreload();

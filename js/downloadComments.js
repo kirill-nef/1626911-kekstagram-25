@@ -1,4 +1,4 @@
-import {photoDataArray} from './api.js';
+import {photoDataArray} from './main.js';
 
 // Текущий индекс фотографии
 let currentIndex = '';

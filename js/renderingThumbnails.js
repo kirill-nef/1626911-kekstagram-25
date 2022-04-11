@@ -5,8 +5,8 @@ import { openBigPicture } from './openBigPicture.js';
 import { closePopup } from './formWork.js';
 import { setUserForSubmit } from './formWorkValidation.js';
 
-// Функция создания миниатюр вызывается из fetch.js, при успешной загрузки данных с сервера
-function renderingThumbnails (arrayPicture) {
+// Функция создания миниатюр вызывается из photoDataArray при успешной загрузки данных с сервера
+function renderingThumbnails (photoDataArray) {
   // Блок в который будем вставлять шаблоны template
   const listPictures = document.querySelector('.pictures');
   // Поиск template
@@ -14,7 +14,7 @@ function renderingThumbnails (arrayPicture) {
   // Поиск внутри template блок picture
   const templatePictureItem = templatePicture.querySelector('.picture');
   // Сколько картинок создать
-  const THUMBNAILS = arrayPicture.length;
+  const THUMBNAILS = photoDataArray.length;
 
   // Функция создания миниатюр на странице
   const rendering = function (img, comments, likes, index) {
@@ -35,11 +35,11 @@ function renderingThumbnails (arrayPicture) {
     taskPicture.dataset.index = index;
   };
 
-  // Цикл для парсинга массива arrayPicture
+  // Цикл для парсинга массива photoDataArray
   for (let i = 0; i < THUMBNAILS; i++) {
-    const IMG = arrayPicture[i].url;
-    const COMMENTS = arrayPicture[i].comments.length;
-    const LIKES = arrayPicture[i].likes;
+    const IMG = photoDataArray[i].url;
+    const COMMENTS = photoDataArray[i].comments.length;
+    const LIKES = photoDataArray[i].likes;
     rendering(IMG, COMMENTS, LIKES, i);
   }
 

@@ -1,27 +1,12 @@
 // Модуль создания миниатюр на странице
-import {renderingThumbnails} from './renderingThumbnails.js';
-// Функция вывода сообщения об ошибке
-import {showAlert} from './util.js';
-
-// Массив с фотографиями и их данными
-let photoDataArray;
 
 // Получем данные с сервера
-const getData = () => {
-  fetch('https://25.javascript.pages.academy/kekstagram/data')
-    .catch(() => {
-      showAlert('Не удалось загрузить данные с сервера, попробуйте обновить зайти позднее!', 16000);
-      return false;
-    })
-    .then((respone) => respone.json())
-    .then((photoData) => {
-      photoDataArray = photoData;
-      // Вызываем функцию создания миниатюр на странице
-      renderingThumbnails(photoDataArray);
-    });
-};
+const getData = () =>  fetch('https://25.javascript.pages.academy/kekstagram/data')
+  .then((respone) => respone.json())
+  .then((photoData) => photoData)
+  .catch(() => false);
 
-const sendData = (onSuccess, onFail, body) => {
+const sendData = (onSuccess, message, body) => {
   fetch(
     'https://25.javascript.pages.academy/kekstagram',
     {
@@ -32,16 +17,16 @@ const sendData = (onSuccess, onFail, body) => {
     .then((response) => {
       if (response.ok) {
         onSuccess();
-        onFail('Фотография успешно отправлена!', 6000);
+        message('Фотография успешно отправлена!', 6000);
       }
       else {
         onSuccess();
-        onFail('Фотография отправлена, но с ошибкой!', 6000);
+        message('Фотография отправлена, но с ошибкой!', 6000);
       }
     })
     .catch(() => {
-      onFail('Не удалось отправить форму. Попробуйте ещё раз', 6000);
+      message('Не удалось отправить форму. Попробуйте ещё раз', 6000);
     });
 };
 
-export {photoDataArray, getData, sendData};
+export {getData, sendData};
