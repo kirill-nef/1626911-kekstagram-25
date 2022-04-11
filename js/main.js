@@ -6,7 +6,7 @@ import './formWork.js';
 // Модуль изменения размера картинки в форме
 import './formWorkScale.js';
 // Модуль создания миниатюр на странице
-import {renderingThumbnails} from './renderingThumbnails.js';
+import {drowThumbnails} from './drowThumbnails.js';
 
 import { showAlert } from './util.js';
 
@@ -22,7 +22,7 @@ getData().then((data) => {
       showAlert('Не удалось загрузить данные с сервера, попробуйте обновить зайти позднее!', 16000);
     }
     else {
-      renderingThumbnails(photoDataArray);
+      drowThumbnails(photoDataArray);
     }
 
   });

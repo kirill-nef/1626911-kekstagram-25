@@ -6,7 +6,7 @@ import { closePopup } from './formWork.js';
 import { setUserForSubmit } from './formWorkValidation.js';
 
 // Функция создания миниатюр вызывается из photoDataArray при успешной загрузки данных с сервера
-function renderingThumbnails (photoDataArray) {
+function drowThumbnails (photoDataArray) {
   // Блок в который будем вставлять шаблоны template
   const listPictures = document.querySelector('.pictures');
   // Поиск template
@@ -17,7 +17,7 @@ function renderingThumbnails (photoDataArray) {
   const THUMBNAILS = photoDataArray.length;
 
   // Функция создания миниатюр на странице
-  const rendering = function (img, comments, likes, index) {
+  const drow = function (img, comments, likes, index) {
     // Делаем полный клон блока
     const taskPicture = templatePictureItem.cloneNode(true);
     // Задаем src для картинки
@@ -40,7 +40,7 @@ function renderingThumbnails (photoDataArray) {
     const IMG = photoDataArray[i].url;
     const COMMENTS = photoDataArray[i].comments.length;
     const LIKES = photoDataArray[i].likes;
-    rendering(IMG, COMMENTS, LIKES, i);
+    drow(IMG, COMMENTS, LIKES, i);
   }
 
   // Подключение функции слежения за кликами на миниатюрку
@@ -63,4 +63,4 @@ function clickThumbnails () {
 // Вызов функции отправки формы
 setUserForSubmit(closePopup);
 
-export {renderingThumbnails};
+export {drowThumbnails};
