@@ -1,12 +1,30 @@
-// 1 Функция создания рандомных пользователей пользователей (Имя/коммент/аватар и тд)
-import './createArrayUsers.js';
-// 2 Модуль создания массива с фотографиями
-import './createArrayPicture.js';
-// 3 Функция создания миниатюр на странице
-import './renderingThumbnails.js';
-// 4 Функция открытия большой картинки
-import './openBigPicture.js';
-// 5 Модуль работы с формой
+
+//Модуль получения данных от сервера
+import { getData } from './api.js';
+// Модуль отправки формы с фотографией
 import './formWork.js';
-// 6 Модуль работы со слайдером
-import './formWorkSlider.js';
+// Модуль изменения размера картинки в форме
+import './formWorkScale.js';
+// Модуль создания миниатюр на странице
+import {drowThumbnails} from './drowThumbnails.js';
+
+import { showAlert } from './util.js';
+
+// Массив данных, подгружается из getData
+let photoDataArray;
+
+getData().then((data) => {
+  photoDataArray = data;
+})
+
+  .then(() => {
+    if (photoDataArray === false) {
+      showAlert('Не удалось загрузить данные с сервера, попробуйте обновить зайти позднее!', 16000);
+    }
+    else {
+      drowThumbnails(photoDataArray);
+    }
+
+  });
+
+export {photoDataArray};

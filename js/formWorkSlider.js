@@ -1,4 +1,4 @@
-import { effectConfig } from './data.js';
+import { effectConfig } from './formWorkData.js';
 
 // Бокс под слайдер
 const boxSlider = document.querySelector('.img-upload__effect-level');
@@ -23,13 +23,14 @@ noUiSlider.create(sliderElement, {
     min: 0,
     max: 100,
   },
-  start: 80,
+  start: 100,
   step: 1,
   connect: 'lower',
 });
 
 // Слежение за изменением слайдера
 sliderElement.noUiSlider.on('update', () => {
+  // Меняет значение в input
   valueElement.value = sliderElement.noUiSlider.get();
   controlSlider();
 });
@@ -48,14 +49,21 @@ function controlSlider () {
 
 // Функция подгрузки настроек для фильтров. Вызывается при изменении активной радио кнопки.
 function sliderSetting () {
-  boxSlider.classList.remove('hidden');
-  const effect = effectConfig[chekedValue];
-  effectName = effect.effectProperty;
-  method = effect.unit;
-  sliderElement.noUiSlider.updateOptions(effect.sliderConfig);
   // Если нет эффекта
   if (chekedValue === 'none') {
-    imgUploadPreview.style.filter = 'none';
-    boxSlider.classList.add('hidden');
+    closeSlider();
+  } else {
+    boxSlider.classList.remove('hidden');
+    const effect = effectConfig[chekedValue];
+    effectName = effect.effectProperty;
+    method = effect.unit;
+    sliderElement.noUiSlider.updateOptions(effect.sliderConfig);
   }
 }
+
+function closeSlider () {
+  imgUploadPreview.style.filter = 'none';
+  boxSlider.classList.add('hidden');
+}
+
+export {closeSlider};
