@@ -5,26 +5,27 @@ import { getData } from './api.js';
 import './formWork.js';
 // Модуль изменения размера картинки в форме
 import './formWorkScale.js';
-// Модуль создания миниатюр на странице
-import {drowThumbnails} from './drowThumbnails.js';
-
+// Модуль вызова сообщения
 import { showAlert } from './util.js';
+// Модель тестовый
+import { getSorting } from './sorting.js';
 
-// Массив данных, подгружается из getData
+// Массив данных, подгружается из getData с  сервера
 let photoDataArray;
+
+// Массив для импорта
+const getOriginalDataArray = () => photoDataArray;
 
 getData().then((data) => {
   photoDataArray = data;
 })
-
   .then(() => {
     if (photoDataArray === false) {
       showAlert('Не удалось загрузить данные с сервера, попробуйте обновить зайти позднее!', 16000);
     }
     else {
-      drowThumbnails(photoDataArray);
+      getSorting();
     }
-
   });
 
-export {photoDataArray};
+export { photoDataArray, getOriginalDataArray };

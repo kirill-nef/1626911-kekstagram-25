@@ -1,6 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {photoDataArray} from './main.js';
-
+import {getActiveDataArray} from './sorting.js';
 import {counterComment, defaultCommentsPreload} from './downloadComments.js';
 
 // Поиск блока с большой фотографией
@@ -55,13 +54,13 @@ function closePopup () {
 // Функция открытия большой фотографии вызывается при клике из функции renderingTh....
 function openBigPicture (index) {
   // Поиск лайков в миниатюрной картинке для подставляния в большую
-  const usersLikes = photoDataArray[index].likes;
+  const usersLikes = getActiveDataArray()[index].likes;
   // Меняем ссылку картинки
   bigPicture.src = `./photos/${ Number(index) + 1 }.jpg`;
   // Вставляем лайки
   bigPictureLikes.textContent = usersLikes;
   // Вставляем описание к большой фотографии
-  bigPictureDescription.textContent = photoDataArray[index].description;
+  bigPictureDescription.textContent = getActiveDataArray()[index].description;
   // Снимаем класс hidden для открытия большой картинки
   bigPictureBlock.classList.remove('hidden');
   // Отключаем скролл фона
