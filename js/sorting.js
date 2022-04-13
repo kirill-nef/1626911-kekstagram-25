@@ -7,11 +7,7 @@ import { getOriginalDataArray } from './main.js';
 let activeDataArray;
 
 // Функция для экспорта масиива
-// const getActiveDataArray = () => activeDataArray;
-function getActiveDataArray() {
-  console.log(activeDataArray);
-  return activeDataArray;
-}
+const getActiveDataArray = () => activeDataArray;
 
 // Функция сортироки
 function getSorting () {

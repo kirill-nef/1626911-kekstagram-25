@@ -1,4 +1,4 @@
-import {photoDataArray} from './main.js';
+import { getActiveDataArray } from './sorting.js';
 
 // Текущий индекс фотографии
 let currentIndex = '';
@@ -35,16 +35,20 @@ function defaultCommentsPreload () {
   checkComment = 0;
 }
 
-// Обработчик кнопки загруки комментариев
-commentsLoader.addEventListener('click', () => {
+function loadComments() {
   loaderComment(fromComentsPreload, toComentsPreload);
-});
+}
+
+// Обработчик кнопки загруки комментариев
+commentsLoader.addEventListener('click', loadComments);
 
 // Включение/отключение счетчика фоток и кнопки загрузки комментариев
 function counterComment (pictureIndex) {
-  // Получам данные и заносим в переменные
+  // Получам данные о текущей картинке и заносим в переменные
   currentIndex = pictureIndex;
-  countComments = photoDataArray[currentIndex].comments.length;
+  // Получаем из массива нужный элемент и узнаем длину массива с комментами
+  const element = getActiveDataArray()[currentIndex];
+  countComments = element.comments.length;
 
   if (countComments > countPreload) {
     // Включаем показ счетчика
@@ -65,6 +69,10 @@ function counterComment (pictureIndex) {
 
 // Фукция публикации комментов из массива
 function loaderComment (fromIndex, toIndex) {
+  // Получаем массив комментов
+  const element = getActiveDataArray()[currentIndex];
+
+  // Публикуем...
   for (let i = fromIndex; i < toIndex; i++) {
     // Делаем полный клон блока комментов
     const taskComments = commentsItem.cloneNode(true);
@@ -74,10 +82,10 @@ function loaderComment (fromIndex, toIndex) {
     const taskCommentsText = taskComments.querySelector('p');
 
     // Берем информацию о пользователе массива и записываем в аватарку
-    taskCommentsImg.src = photoDataArray[currentIndex].comments[i].avatar;
-    taskCommentsImg.alt = photoDataArray[currentIndex].comments[i].name;
+    taskCommentsImg.src = element.comments[i].avatar;
+    taskCommentsImg.alt = element.comments[i].name;
     // Вставляем комментарий в разметку
-    taskCommentsText.textContent = photoDataArray[currentIndex].comments[i].message;
+    taskCommentsText.textContent = element.comments[i].message;
     // Публикуем на страницу
     commentsList.appendChild(taskComments);
   }
@@ -100,4 +108,4 @@ function loaderComment (fromIndex, toIndex) {
   }
 }
 
-export {counterComment, defaultCommentsPreload};
+export {counterComment, defaultCommentsPreload, loadComments};
