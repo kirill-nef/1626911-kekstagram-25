@@ -34,7 +34,6 @@ const drow = function (img, comments, likes, index) {
 
 // Функция создания миниатюр вызывается из photoDataArray при успешной загрузки данных с сервера
 function drowThumbnails (photoDataArray) {
-
   const THUMBNAILS = photoDataArray.length;
 
   // Цикл для парсинга массива photoDataArray
@@ -44,9 +43,6 @@ function drowThumbnails (photoDataArray) {
     const LIKES = photoDataArray[i].likes;
     drow(IMG, COMMENTS, LIKES, i);
   }
-
-  // Подключение функции слежения за кликами на миниатюрку
-  clickThumbnails();
 }
 
 // Функция слежения за кликами на миниатюрку
@@ -65,4 +61,4 @@ function clickThumbnails () {
 // Вызов функции отправки формы
 setUserForSubmit(closePopup);
 
-export {drowThumbnails};
+export {drowThumbnails, clickThumbnails};

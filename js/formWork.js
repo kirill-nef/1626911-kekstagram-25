@@ -6,6 +6,7 @@ import {isEscapeKey} from './util.js';
 import  {closeSlider} from './formWorkSlider.js';
 // Поля вывода ошибок по инпутам
 import  {hashTagsValidText, descriptionValidText, fieldComment, fieldHashtags} from './formWorkValidation.js';
+import {loadComments} from './downloadComments.js';
 
 // Поиск окна выгрузки
 const imgUpload = document.querySelector('.img-upload__overlay');
@@ -33,6 +34,9 @@ function closePopup () {
   hashTagsValidText.textContent = '';
   descriptionValidText.textContent = '';
   uploadImg.style.transform = 'none';
+  const bigPictureSocial = document.querySelector('.big-picture__social');
+  const commentsLoader = bigPictureSocial.querySelector('.comments-loader');
+  commentsLoader.removeEventListener('click', loadComments);
   closeSlider();
 }
 

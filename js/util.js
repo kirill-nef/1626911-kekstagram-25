@@ -35,4 +35,12 @@ const showAlert = (message, time) => {
   }, time);
 };
 
-export {showAlert};
+function debounce (callback, timeoutDelay) {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+export {showAlert, debounce};
