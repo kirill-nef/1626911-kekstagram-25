@@ -3,8 +3,13 @@ import { drowThumbnails, clickThumbnails } from './drowThumbnails.js';
 // Получение оригинального массива данных
 import { getOriginalDataArray } from './main.js';
 
+// функция debounce
+import {debounce} from './util.js';
+
 // Активный массив
 let activeDataArray;
+
+const DELEY = 500;
 
 // Функция для экспорта масиива
 const getActiveDataArray = () => activeDataArray;
@@ -28,51 +33,47 @@ function getSorting () {
   const buttonDiscussed = document.getElementById('filter-discussed');
 
   // RANDOM BUTTON
-  buttonRandom.addEventListener('click', () => {
-    cleanThumbnails();
-    changeActiveButton(buttonRandom);
-    sortRandomPhotos();
-  });
-
+  buttonRandom.addEventListener('click', debounce(sortRandomPhotos, DELEY));
   // DISCUSSED BUTTON
-  buttonDiscussed.addEventListener('click', () => {
-    cleanThumbnails();
-    changeActiveButton(buttonDiscussed);
-    sortDiscussed();
-  });
-
+  buttonDiscussed.addEventListener('click', debounce(sortDiscussed, DELEY));
   // DEFAULT BUTTON
-  buttonDefault.addEventListener('click', () => {
-    cleanThumbnails();
-    changeActiveButton(buttonDefault);
-    drowThumbnails(getOriginalDataArray());
-  });
+  buttonDefault.addEventListener('click', debounce(sortDefault, DELEY));
 
-  // Функция чистки миниатюр
+
+  // Функция чистки миниатюр из списка
   function cleanThumbnails () {
     document.querySelectorAll('.picture').forEach((el) => el.remove());
   }
 
   // Смена активной кнопки
   function changeActiveButton (newActiveButton) {
+    cleanThumbnails();
     const activeButton = document.querySelector('.img-filters__button--active');
     activeButton.classList.remove('img-filters__button--active');
     newActiveButton.classList.add('img-filters__button--active');
-    activeButton.disabled = false;
-    newActiveButton.disabled = true;
   }
 
-  // Функция рандомной сортировки
+  // По кнопке! Функция рандомной сортировки
   function sortRandomPhotos () {
+    changeActiveButton(buttonRandom);
     activeDataArray = getOriginalDataArray().slice().sort(() => Math.random() - 0.5).slice(0, 10);
     drowThumbnails(activeDataArray);
   }
 
-  // Функция сортровки по количеству коментов
+  // По кнопке! Функция сортровки по количеству коментов
   function sortDiscussed () {
+    changeActiveButton(buttonDiscussed);
     activeDataArray = getOriginalDataArray().slice().sort((firstImage, secondImage) => secondImage.comments.length - firstImage.comments.length);
     drowThumbnails(activeDataArray);
   }
+
+  // По кнопке! Функция сортровки по количеству коментов
+  function sortDefault () {
+    changeActiveButton(buttonDefault);
+    activeDataArray = getOriginalDataArray();
+    drowThumbnails(activeDataArray);
+  }
+
 }
 
 

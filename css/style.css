@@ -148,15 +148,37 @@ main {
   cursor: pointer;
   background-color: #232321;
   border: none;
+
+  transition: all 0.1s linear;
 }
 
-.img-filters__button:active,
 .img-filters__button--active {
-  color: #ff4e4e;
+  color: #8c0c0c;
+
+  background-color: #ffffff;
+  border-radius: 2px;
+  outline: 2px solid #a90e0e;
+}
+
+.img-filters__button:hover {
+  color: #8c0c0c;
 
   background-color: #ffffff;
   border-radius: 2px;
 }
+
+.img-filters__button:active {
+  color: #ff4e4e;
+
+  background-color: #ffffff;
+  border-radius: 2px;
+  outline: 2px solid #cccccc;
+}
+
+.img-filters__button:disabled {
+  cursor: default;
+}
+
 
 .img-filters__label {
   padding: 5px 15px;
