@@ -9,13 +9,15 @@ import './formWorkScale.js';
 import { showAlert } from './util.js';
 // Модель тестовый
 import { getSorting } from './sorting.js';
-
+// Модуль публикации фото из инпута
+import './publicationPhoto.js';
 // Массив данных, подгружается из getData с  сервера
 let photoDataArray;
 
 // Массив для импорта
 const getOriginalDataArray = () => photoDataArray;
 
+// Получение данных с сервера и публикация в массив
 getData().then((data) => {
   photoDataArray = data;
 })

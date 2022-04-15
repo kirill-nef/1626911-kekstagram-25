@@ -2,15 +2,12 @@
 import { drowThumbnails, clickThumbnails } from './drowThumbnails.js';
 // Получение оригинального массива данных
 import { getOriginalDataArray } from './main.js';
-
 // функция debounce
 import {debounce} from './util.js';
 
 // Активный массив
 let activeDataArray;
-
-const DELEY = 500;
-
+const DELEY = 300;
 // Функция для экспорта масиива
 const getActiveDataArray = () => activeDataArray;
 
