@@ -14,6 +14,7 @@ import './publicationPhoto.js';
 // Массив данных, подгружается из getData с  сервера
 let photoDataArray;
 
+
 // Массив для импорта
 const getOriginalDataArray = () => photoDataArray;
 

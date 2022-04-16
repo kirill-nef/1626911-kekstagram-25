@@ -1,10 +1,6 @@
 // Для вызова функции открытия большой картинки
 import { openBigPicture } from './openBigPicture.js';
 
-// Для Вызова функции отправки формы
-import { closePopup } from './formWork.js';
-import { setUserForSubmit } from './formWorkValidation.js';
-
 // Блок в который будем вставлять шаблоны template
 const listPictures = document.querySelector('.pictures');
 // Поиск template
@@ -57,8 +53,5 @@ function clickThumbnails () {
   });
 
 }
-
-// Вызов функции отправки формы
-setUserForSubmit(closePopup);
 
 export {drowThumbnails, clickThumbnails};

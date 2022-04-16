@@ -5,44 +5,55 @@ import {isEscapeKey} from './util.js';
 // Закрытие слайдера
 import  {closeSlider} from './formWorkSlider.js';
 // Поля вывода ошибок по инпутам
-import  {hashTagsValidText, descriptionValidText, fieldComment, fieldHashtags} from './formWorkValidation.js';
-import {loadComments} from './downloadComments.js';
+import  {fieldComment, fieldHashtags, setUserForSubmit} from './formWorkValidation.js';
 
 // Поиск окна выгрузки
 const imgUpload = document.querySelector('.img-upload__overlay');
 // Поиск кнопки закрытия окна выгрузки
-const cancellButton = imgUpload.querySelector('.cancel');
+const cancellButtonUpload = document.getElementById('upload-cancel');
 // Инпут с данными
 const imgUploadInput = document.querySelector('.img-upload__input');
-
+// Фотография
 const uploadImg = document.querySelector('.img-upload__preview img');
+// Поля ввода комментов и хэштегов
+const textHashtags = document.querySelector('.text__hashtags');
+const textDescription = document.querySelector('.text__description');
+// Место вывода ошибки о валидации хэштега или коммента
+const hashTagsValidText = document.querySelector('.text__error-hashtag');
+const descriptionValidText = document.querySelector('.text__error-description');
+// Инпут с процентами размера фотографии
+const scaleControl = document.querySelector('.scale__control--value');
+// Кнопки выбора эффекта
+const effectsRadio = document.querySelectorAll('.effects__radio');
 
 // Функция для закрытия окна с большой фотографией по нажатию Escape
 const onPopupEscapeKeydown = (evt) => {
   if (isEscapeKey(evt) && evt.target !== fieldHashtags && evt.target !== fieldComment) {
     evt.preventDefault();
-    closePopup();
+    closePopupUpload();
   }
 };
 
 // Удаление обработчика функции закрытия по Escape
-function closePopup () {
+function closePopupUpload () {
+  closeSlider();
   imgUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscapeKeydown);
   imgUploadInput.value = '';
+  scaleControl.value = '100';
+  textHashtags.value = '';
+  textDescription.value = '';
   hashTagsValidText.textContent = '';
   descriptionValidText.textContent = '';
-  uploadImg.style.transform = 'none';
-  const bigPictureSocial = document.querySelector('.big-picture__social');
-  const commentsLoader = bigPictureSocial.querySelector('.comments-loader');
-  commentsLoader.removeEventListener('click', loadComments);
-  closeSlider();
+  effectsRadio[0].checked = true;
+  uploadImg.style = null;
+  uploadImg.src = '';
 }
 
 // Функция закрытия окна выгрузки по крестику
-cancellButton.addEventListener('click', () => {
-  closePopup();
+cancellButtonUpload.addEventListener('click', () => {
+  closePopupUpload();
 });
 
 // Открытие окна выгрузки при изменении инпута
@@ -54,4 +65,5 @@ imgUploadInput.onchange = function() {
   document.addEventListener('keydown', onPopupEscapeKeydown);
 };
 
-export {closePopup};
+// Вызов функции отправки формы
+setUserForSubmit(closePopupUpload);

@@ -1,5 +1,9 @@
 // Модуль валидация формы
 
+
+// Модули для вызова окон
+import {formError, formSuccess} from './formMsg.js';
+
 // Функция вывода сообщения об ошибке
 import {showAlert} from './util.js';
 // Функция отправки формы
@@ -43,14 +47,23 @@ const setUserForSubmit = (onSuccess) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
-      const formData = new FormData(evt.target);
       blockSubmitButton();
-      sendData(onSuccess, showAlert, formData);
-      unblockSubmitButton();
+
+      sendData(
+        () => {
+          onSuccess();
+          formSuccess('Фотография успешно отправлена!');
+          unblockSubmitButton();
+        },
+        () => {
+          formError();
+          unblockSubmitButton();
+        },
+        new FormData(evt.target),
+      );
     }
     else {
       showAlert('Проверьте правильность введенных данных!', 6000);
-      unblockSubmitButton();
     }
   });
 };

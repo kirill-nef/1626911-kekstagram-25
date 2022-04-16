@@ -14,22 +14,22 @@ const bigPictureDescription = bigPictureBlock.querySelector('.social__caption');
 const fieldComments = document.querySelector('.social__footer-text');
 
 // Поиск кнопки закрытия в блоке большой фотографии
-const cancellButton = bigPictureBlock.querySelector('.cancel');
+const cancellButtonPicture = document.getElementById('picture-cancel');
 
 // Закрытие окна с большой фотографией по клику на крестик
-cancellButton.addEventListener('click', () => {
-  closePopup();
+cancellButtonPicture.addEventListener('click', () => {
+  closePopupPicture();
 });
 
 // Функция для закрытия окна с большой фотографией по нажатию Escape
 const onPopupEscapeKeydown = (evt) => {
   if (isEscapeKey(evt) && evt.target !== fieldComments) {
-    closePopup();
+    closePopupPicture();
   }
 };
 
 // Закрытие и удаление обработчика закрывания
-function closePopup () {
+function closePopupPicture () {
   bigPictureBlock.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscapeKeydown);
