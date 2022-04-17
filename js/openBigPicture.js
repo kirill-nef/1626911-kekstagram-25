@@ -1,6 +1,6 @@
 import {isEscapeKey} from './util.js';
-import {getActiveDataArray} from './sorting.js';
-import {counterComment, defaultCommentsPreload} from './downloadComments.js';
+import {getActiveArrayDatum} from './sorting.js';
+import {monitorCommentCounters, setDefaultCommentsPreload} from './loadComments.js';
 
 // Поиск блока с большой фотографией
 const bigPictureBlock = document.querySelector('.big-picture');
@@ -48,12 +48,12 @@ function closePopupPicture () {
     bigPictureDescription.textContent = '';
   }
 
-  defaultCommentsPreload();
+  setDefaultCommentsPreload();
 }
 
 // Функция открытия большой фотографии вызывается при клике из функции renderingTh....
 function openBigPicture (index) {
-  const element = getActiveDataArray()[index];
+  const element = getActiveArrayDatum()[index];
   // Меняем ссылку картинки
   bigPicture.src = `${element.url}`;
   // Вставляем лайки
@@ -65,7 +65,7 @@ function openBigPicture (index) {
   // Отключаем скролл фона
   document.body.classList.add('modal-open');
   // Вызов функции работы с комментариями и их количествами
-  counterComment(index);
+  monitorCommentCounters(index);
   // Подключение функции закрытия большого окна по нажатию Escape
   document.addEventListener('keydown', onPopupEscapeKeydown);
 }

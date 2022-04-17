@@ -1,4 +1,4 @@
-function formSuccess () {
+function showFormSuccess () {
   // Поиск template
   const templateSucsess = document.querySelector('#success').content;
   // Поиск внутри template блок success
@@ -17,7 +17,7 @@ function formSuccess () {
   });
 }
 
-function formError () {
+function showFormError () {
   const imgUploadButton = document.querySelector('.img-upload__input');
 
   // Поиск template
@@ -40,4 +40,4 @@ function formError () {
 }
 
 
-export {formSuccess, formError};
+export {showFormSuccess, showFormError};

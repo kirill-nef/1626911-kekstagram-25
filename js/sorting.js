@@ -1,21 +1,21 @@
 // Модуль создания миниатюр на странице
 import { drowThumbnails, clickThumbnails } from './drowThumbnails.js';
 // Получение оригинального массива данных
-import { getOriginalDataArray } from './main.js';
+import { getOriginalArrayDatum } from './main.js';
 // функция debounce
 import {debounce} from './util.js';
 
 // Активный массив
-let activeDataArray;
+let activeArrayDatum;
 const DELEY = 300;
 // Функция для экспорта масиива
-const getActiveDataArray = () => activeDataArray;
+const getActiveArrayDatum = () => activeArrayDatum;
 
 // Функция сортироки
 function getSorting () {
   // Первоначальная публикация, по умолчанию
-  drowThumbnails(getOriginalDataArray());
-  activeDataArray = getOriginalDataArray();
+  drowThumbnails(getOriginalArrayDatum());
+  activeArrayDatum = getOriginalArrayDatum();
   clickThumbnails();
 
   // Блок фильтров
@@ -53,25 +53,25 @@ function getSorting () {
   // По кнопке! Функция рандомной сортировки
   function sortRandomPhotos () {
     changeActiveButton(buttonRandom);
-    activeDataArray = getOriginalDataArray().slice().sort(() => Math.random() - 0.5).slice(0, 10);
-    drowThumbnails(activeDataArray);
+    activeArrayDatum = getOriginalArrayDatum().slice().sort(() => Math.random() - 0.5).slice(0, 10);
+    drowThumbnails(activeArrayDatum);
   }
 
   // По кнопке! Функция сортровки по количеству коментов
   function sortDiscussed () {
     changeActiveButton(buttonDiscussed);
-    activeDataArray = getOriginalDataArray().slice().sort((firstImage, secondImage) => secondImage.comments.length - firstImage.comments.length);
-    drowThumbnails(activeDataArray);
+    activeArrayDatum = getOriginalArrayDatum().slice().sort((firstImage, secondImage) => secondImage.comments.length - firstImage.comments.length);
+    drowThumbnails(activeArrayDatum);
   }
 
   // По кнопке! Функция сортровки по количеству коментов
   function sortDefault () {
     changeActiveButton(buttonDefault);
-    activeDataArray = getOriginalDataArray();
-    drowThumbnails(activeDataArray);
+    activeArrayDatum = getOriginalArrayDatum();
+    drowThumbnails(activeArrayDatum);
   }
 
 }
 
 
-export {getActiveDataArray, getSorting};
+export {getActiveArrayDatum, getSorting};

@@ -32,23 +32,23 @@ noUiSlider.create(sliderElement, {
 sliderElement.noUiSlider.on('update', () => {
   // Меняет значение в input
   valueElement.value = sliderElement.noUiSlider.get();
-  controlSlider();
+  setEffect();
 });
 
 // Получение от радио кнопки выбранный фильтр
 effectsList.addEventListener('change', (evt) => {
   chekedValue = evt.target.closest('input[type="radio"]').value;
-  sliderSetting();
+  settingSlider();
 });
 
 // Функция применяющая эффект на фотографию. Вызывается при работе слайдера.
-function controlSlider () {
+function setEffect () {
   imgUploadPreview.style.filter = `${ effectName }(${ valueElement.value + method})`;
   return '';
 }
 
 // Функция подгрузки настроек для фильтров. Вызывается при изменении активной радио кнопки.
-function sliderSetting () {
+function settingSlider () {
   // Если нет эффекта
   if (chekedValue === 'none') {
     closeSlider();

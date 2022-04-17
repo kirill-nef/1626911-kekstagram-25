@@ -1,6 +1,3 @@
-// Модуль создания миниатюр на странице
-
-
 // Получем данные с сервера
 const getData = () =>  fetch('https://25.javascript.pages.academy/kekstagram/data')
   .then((respone) => respone.json())

@@ -1,4 +1,4 @@
-import { getActiveDataArray } from './sorting.js';
+import { getActiveArrayDatum } from './sorting.js';
 
 // Текущий индекс фотографии
 let currentIndex = '';
@@ -17,7 +17,7 @@ const commentsList = document.querySelector('.social__comments');
 // Поиск в template блок comments
 const commentsItem = document.querySelector('#comments').content.querySelector('.social__comment');
 // Количество первоначально загруженных комментов
-const countPreload = 5;
+const PRELOAD = 5;
 
 // Поиск блока с указанием числа комментариев
 const socialCommentCount = bigPictureSocial.querySelector('.social__comment-count');
@@ -26,51 +26,51 @@ const commentsLoader = bigPictureSocial.querySelector('.comments-loader');
 
 // Индекс начального и конечного числа загрузки комментария
 let fromComentsPreload = 0;
-let toComentsPreload = countPreload;
+let toComentsPreload = PRELOAD;
 
 // Функция установки начальных значений, вызывается при закрытии окна боьшой фотографии
-function defaultCommentsPreload () {
+function setDefaultCommentsPreload () {
   fromComentsPreload = 0;
-  toComentsPreload = countPreload;
+  toComentsPreload = PRELOAD;
   checkComment = 0;
 }
 
 function loadComments() {
-  loaderComment(fromComentsPreload, toComentsPreload);
+  postComments(fromComentsPreload, toComentsPreload);
 }
 
 // Обработчик кнопки загруки комментариев
 commentsLoader.addEventListener('click', loadComments);
 
 // Включение/отключение счетчика фоток и кнопки загрузки комментариев
-function counterComment (pictureIndex) {
+function monitorCommentCounters (pictureIndex) {
   // Получам данные о текущей картинке и заносим в переменные
   currentIndex = pictureIndex;
   // Получаем из массива нужный элемент и узнаем длину массива с комментами
-  const element = getActiveDataArray()[currentIndex];
+  const element = getActiveArrayDatum()[currentIndex];
   countComments = element.comments.length;
 
-  if (countComments > countPreload) {
+  if (countComments > PRELOAD) {
     // Включаем показ счетчика
     socialCommentCount.classList.remove('hidden');
     commentsLoader.classList.remove('hidden');
     // Подставляем число всех коментов в счетчик
     сommentsСount.textContent = countComments;
     // Вызов функции генерации комменатрия при начальном открытии окна
-    loaderComment(fromComentsPreload, toComentsPreload);
+    postComments(fromComentsPreload, toComentsPreload);
   } else {
     // Выключаем показ счетчика
     socialCommentCount.classList.add('hidden');
     commentsLoader.classList.add('hidden');
     // Вызов функции генерации комменатрия при начальном открытии окна
-    loaderComment(fromComentsPreload, countComments);
+    postComments(fromComentsPreload, countComments);
   }
 }
 
 // Фукция публикации комментов из массива
-function loaderComment (fromIndex, toIndex) {
+function postComments (fromIndex, toIndex) {
   // Получаем массив комментов
-  const element = getActiveDataArray()[currentIndex];
+  const element = getActiveArrayDatum()[currentIndex];
 
   // Публикуем...
   for (let i = fromIndex; i < toIndex; i++) {
@@ -93,12 +93,12 @@ function loaderComment (fromIndex, toIndex) {
   сommentsСountCurrent.textContent = commentsList.querySelectorAll('.social__comment').length;
 
   // Обновляем данные в переменных
-  checkComment = toComentsPreload + countPreload;
+  checkComment = toComentsPreload + PRELOAD;
   fromComentsPreload = toComentsPreload;
 
   // Условие, чтобы было невозможно запросить несуществующие комментарии
   if (countComments > checkComment) {
-    toComentsPreload = toComentsPreload + countPreload;
+    toComentsPreload = toComentsPreload + PRELOAD;
   }
   else {
     toComentsPreload = countComments;
@@ -108,4 +108,4 @@ function loaderComment (fromIndex, toIndex) {
   }
 }
 
-export {counterComment, defaultCommentsPreload, loadComments};
+export {monitorCommentCounters, setDefaultCommentsPreload, loadComments};

@@ -1,8 +1,5 @@
-// Модуль валидация формы
-
-
-// Модули для вызова окон
-import {formError, formSuccess} from './formMsg.js';
+// Модули для вызова окон от успешной-неуспешной отправки формы
+import {showFormError, showFormSuccess} from './formMsg.js';
 
 // Функция вывода сообщения об ошибке
 import {showAlert} from './util.js';
@@ -32,7 +29,7 @@ const pristine = new Pristine(uploadForm, {
   errorTextClass: 'text__error',
 });
 
-// Кнопки
+// Блокировка разблокировка фотки отправки формы
 const blockSubmitButton = () => {
   submitButton.disabled = true;
   submitButton.textContent = 'Публикую...';
@@ -42,21 +39,21 @@ const unblockSubmitButton = () => {
   submitButton.textContent = 'Опубликовать';
 };
 
+// При успешной валидации, отправляется форма через fetch(sendData)
 const setUserForSubmit = (onSuccess) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
-
       sendData(
         () => {
           onSuccess();
-          formSuccess('Фотография успешно отправлена!');
+          showFormSuccess('Фотография успешно отправлена!');
           unblockSubmitButton();
         },
         () => {
-          formError();
+          showFormError();
           unblockSubmitButton();
         },
         new FormData(evt.target),
