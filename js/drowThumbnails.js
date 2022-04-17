@@ -1,9 +1,5 @@
-// Для вызова функции открытия большой картинки
+// Функции открытия большой картинки
 import { openBigPicture } from './openBigPicture.js';
-
-// Для Вызова функции отправки формы
-import { closePopup } from './formWork.js';
-import { setUserForSubmit } from './formWorkValidation.js';
 
 // Блок в который будем вставлять шаблоны template
 const listPictures = document.querySelector('.pictures');
@@ -11,7 +7,6 @@ const listPictures = document.querySelector('.pictures');
 const templatePicture = document.querySelector('#picture').content;
 // Поиск внутри template блок picture
 const templatePictureItem = templatePicture.querySelector('.picture');
-// Сколько картинок создать
 
 // Функция отрисовки миниатюр на странице
 const drow = function (img, comments, likes, index) {
@@ -28,19 +23,19 @@ const drow = function (img, comments, likes, index) {
   taskPictureLikes.textContent = likes;
   // Пушим на страницу
   listPictures.appendChild(taskPicture);
-
+  // Ведем параметр dataset
   taskPicture.dataset.index = index;
 };
 
-// Функция создания миниатюр вызывается из photoDataArray при успешной загрузки данных с сервера
-function drowThumbnails (photoDataArray) {
-  const THUMBNAILS = photoDataArray.length;
+// Функция создания миниатюр вызывается из photoArrayDatum при успешной загрузки данных с сервера
+function drowThumbnails (photoArrayDatum) {
+  const THUMBNAILS = photoArrayDatum.length;
 
-  // Цикл для парсинга массива photoDataArray
+  // Цикл для парсинга массива photoArrayDatum
   for (let i = 0; i < THUMBNAILS; i++) {
-    const IMG = photoDataArray[i].url;
-    const COMMENTS = photoDataArray[i].comments.length;
-    const LIKES = photoDataArray[i].likes;
+    const IMG = photoArrayDatum[i].url;
+    const COMMENTS = photoArrayDatum[i].comments.length;
+    const LIKES = photoArrayDatum[i].likes;
     drow(IMG, COMMENTS, LIKES, i);
   }
 }
@@ -57,8 +52,5 @@ function clickThumbnails () {
   });
 
 }
-
-// Вызов функции отправки формы
-setUserForSubmit(closePopup);
 
 export {drowThumbnails, clickThumbnails};
