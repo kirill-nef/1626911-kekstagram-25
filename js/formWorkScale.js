@@ -1,5 +1,3 @@
-// Модуль работы с размером изображения
-
 // Поле значения
 const scaleControl = document.querySelector('.scale__control--value');
 // Кнопка минус
@@ -8,7 +6,6 @@ const buttonScaleSmaller = document.querySelector('.scale__control--smaller');
 const buttonScaleBigger = document.querySelector('.scale__control--bigger');
 // Загруженная картинка
 const uploadImg = document.querySelector('.img-upload__preview img');
-
 
 // Шаг изменения значения
 const STEP_VALUE = 25;

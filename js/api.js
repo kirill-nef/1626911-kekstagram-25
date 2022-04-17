@@ -4,6 +4,7 @@ const getData = () =>  fetch('https://25.javascript.pages.academy/kekstagram/dat
   .then((photoData) => photoData)
   .catch(() => false);
 
+// Отправляем данные на сервер
 const sendData = (onSuccess, onFail, body) => {
   fetch(
     'https://25.javascript.pages.academy/kekstagram',

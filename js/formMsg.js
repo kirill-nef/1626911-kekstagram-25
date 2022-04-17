@@ -3,7 +3,6 @@ function showFormSuccess () {
   const templateSucsess = document.querySelector('#success').content;
   // Поиск внутри template блок success
   const templateSucsessItem = templateSucsess.querySelector('.success');
-
   // Делаем полный клон блока
   const successClone = templateSucsessItem.cloneNode(true);
   // Пушим на страницу
@@ -24,7 +23,6 @@ function showFormError () {
   const templateSucsess = document.querySelector('#error').content;
   // Поиск внутри template блок error
   const templateSucsessItem = templateSucsess.querySelector('.error');
-
   // Делаем полный клон блока
   const errorClone = templateSucsessItem.cloneNode(true);
   // Пушим на страницу

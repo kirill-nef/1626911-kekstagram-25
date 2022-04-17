@@ -24,6 +24,7 @@ const showAlert = (message, time) => {
   }, time);
 };
 
+// Для устранения дребезгов
 function debounce (callback, timeoutDelay) {
   let timeoutId;
   return (...rest) => {

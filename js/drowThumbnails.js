@@ -1,4 +1,4 @@
-// Для вызова функции открытия большой картинки
+// Функции открытия большой картинки
 import { openBigPicture } from './openBigPicture.js';
 
 // Блок в который будем вставлять шаблоны template
@@ -7,7 +7,6 @@ const listPictures = document.querySelector('.pictures');
 const templatePicture = document.querySelector('#picture').content;
 // Поиск внутри template блок picture
 const templatePictureItem = templatePicture.querySelector('.picture');
-// Сколько картинок создать
 
 // Функция отрисовки миниатюр на странице
 const drow = function (img, comments, likes, index) {
@@ -24,7 +23,7 @@ const drow = function (img, comments, likes, index) {
   taskPictureLikes.textContent = likes;
   // Пушим на страницу
   listPictures.appendChild(taskPicture);
-
+  // Ведем параметр dataset
   taskPicture.dataset.index = index;
 };
 

@@ -1,6 +1,5 @@
 // Модули для вызова окон от успешной-неуспешной отправки формы
 import {showFormError, showFormSuccess} from './formMsg.js';
-
 // Функция вывода сообщения об ошибке
 import {showAlert} from './util.js';
 // Функция отправки формы
@@ -11,7 +10,6 @@ const uploadForm = document.querySelector('.img-upload__form');
 // В форме поиск окна ввода с хэш-тегом и комментом
 const fieldHashtags = uploadForm.querySelector('.text__hashtags');
 const fieldComment = uploadForm.querySelector('.text__description');
-
 // Место вывода ошибки о валидации хэштега
 const hashTagsValidText = document.querySelector('.text__error-hashtag');
 // Место вывода ошибки о валидации комментария

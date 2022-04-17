@@ -65,5 +65,5 @@ imgUploadInput.onchange = function() {
   document.addEventListener('keydown', onPopupEscapeKeydown);
 };
 
-// Вызов функции отправки формы
+// Активация функции отправки формы
 setUserForSubmit(closePopupUpload);
