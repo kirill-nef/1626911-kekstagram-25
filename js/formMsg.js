@@ -1,13 +1,16 @@
 // Импорт функции закрытия окна по escape
 import {isEscapeKey} from './util.js';
 
+// Имя активного окна с информацией
 let activeWindow;
 
+// Закрытие активного окна
 const closeActiveWindow = () => {
   activeWindow.remove();
   activeWindow = '';
 };
 
+// Слежение за escape
 const msgEscapeKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     closeActiveWindow();
@@ -16,7 +19,7 @@ const msgEscapeKeydown = (evt) => {
 };
 
 
-function showFormSuccess () {
+const showFormSuccess = () => {
   // Поиск template
   const templateSucsess = document.querySelector('#success').content;
   // Поиск внутри template блок success
@@ -37,9 +40,9 @@ function showFormSuccess () {
 
   // Подключение функции закрытия большого окна по нажатию Escape
   document.addEventListener('keydown', msgEscapeKeydown);
-}
+};
 
-function showFormError () {
+const showFormError = () => {
   const imgUploadButton = document.querySelector('.img-upload__input');
 
   // Поиск template
@@ -63,8 +66,7 @@ function showFormError () {
 
   // Подключение функции закрытия большого окна по нажатию Escape
   document.addEventListener('keydown', msgEscapeKeydown);
-
-}
+};
 
 
 export {showFormSuccess, showFormError};

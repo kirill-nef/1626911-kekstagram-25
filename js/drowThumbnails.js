@@ -28,7 +28,7 @@ const drow = (img, comments, likes, index) => {
 };
 
 // Функция создания миниатюр вызывается из photoArrayDatum при успешной загрузки данных с сервера
-function drowThumbnails (photoArrayDatum) {
+const drowThumbnails = (photoArrayDatum) => {
   const thumbnails = photoArrayDatum.length;
 
   // Цикл для парсинга массива photoArrayDatum
@@ -38,19 +38,17 @@ function drowThumbnails (photoArrayDatum) {
     const likes = photoArrayDatum[i].likes;
     drow(img, comments, likes, i);
   }
-}
+};
 
 // Функция слежения за кликами на миниатюрку
-function clickThumbnails () {
+const clickThumbnails = () => {
   const picturesTest = document.querySelector('.pictures');
-
   picturesTest.addEventListener('click', (evt) => {
     if (evt.target.closest('.picture')) {
       // Вызываем функцию открытия большой фотографии
       openBigPicture(evt.target.closest('a').getAttribute('data-index'));
     }
   });
-
-}
+};
 
 export {drowThumbnails, clickThumbnails};

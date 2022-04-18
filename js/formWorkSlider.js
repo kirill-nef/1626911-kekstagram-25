@@ -1,4 +1,4 @@
-import { effectConfig } from './formWorkData.js';
+import { EffectConfig } from './formWorkData.js';
 
 // Бокс под слайдер
 const boxSlider = document.querySelector('.img-upload__effect-level');
@@ -17,6 +17,11 @@ let effectName;
 // Метод счисления
 let method = '';
 
+const closeSlider = () => {
+  imgUploadPreview.style.filter = 'none';
+  boxSlider.classList.add('hidden');
+};
+
 // Создание слайдера
 noUiSlider.create(sliderElement, {
   range: {
@@ -27,6 +32,26 @@ noUiSlider.create(sliderElement, {
   step: 1,
   connect: 'lower',
 });
+
+// Функция применяющая эффект на фотографию. Вызывается при работе слайдера.
+const setEffect = () => {
+  imgUploadPreview.style.filter = `${ effectName }(${ valueElement.value + method})`;
+  return '';
+};
+
+// Функция подгрузки настроек для фильтров. Вызывается при изменении активной радио кнопки.
+const settingSlider = () => {
+  // Если нет эффекта
+  if (chekedValue === 'none') {
+    closeSlider();
+  } else {
+    boxSlider.classList.remove('hidden');
+    const effect = EffectConfig[chekedValue];
+    effectName = effect.effectProperty;
+    method = effect.unit;
+    sliderElement.noUiSlider.updateOptions(effect.sliderConfig);
+  }
+};
 
 // Слежение за изменением слайдера
 sliderElement.noUiSlider.on('update', () => {
@@ -40,30 +65,5 @@ effectsList.addEventListener('change', (evt) => {
   chekedValue = evt.target.closest('input[type="radio"]').value;
   settingSlider();
 });
-
-// Функция применяющая эффект на фотографию. Вызывается при работе слайдера.
-function setEffect () {
-  imgUploadPreview.style.filter = `${ effectName }(${ valueElement.value + method})`;
-  return '';
-}
-
-// Функция подгрузки настроек для фильтров. Вызывается при изменении активной радио кнопки.
-function settingSlider () {
-  // Если нет эффекта
-  if (chekedValue === 'none') {
-    closeSlider();
-  } else {
-    boxSlider.classList.remove('hidden');
-    const effect = effectConfig[chekedValue];
-    effectName = effect.effectProperty;
-    method = effect.unit;
-    sliderElement.noUiSlider.updateOptions(effect.sliderConfig);
-  }
-}
-
-function closeSlider () {
-  imgUploadPreview.style.filter = 'none';
-  boxSlider.classList.add('hidden');
-}
 
 export {closeSlider};

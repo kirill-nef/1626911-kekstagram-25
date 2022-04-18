@@ -64,7 +64,7 @@ const setUserForSubmit = (closePopupUpload) => {
 };
 
 // Валидаця на повторения и количество хэштегов
-function validateHashTags(value) {
+const validateHashTags = (value) => {
   const arrHashTags = value.toLowerCase().split(' ');
   const uniqArrHashTags = new Set(arrHashTags);
   if (arrHashTags.length > 5) {
@@ -77,7 +77,6 @@ function validateHashTags(value) {
     hashTagsValidText.textContent = 'Не должно быть повторяющихся Хэштегов';
     return false;
   }
-
 
   // Валидация хэштега на правильность ввода
   const re = new RegExp('^#[A-Za-zА-Яа-яЁё0-9]{1,20}$');
@@ -97,7 +96,7 @@ function validateHashTags(value) {
 
   hashTagsValidText.textContent = '';
   return true;
-}
+};
 
 pristine.addValidator(fieldHashtags, validateHashTags, 'Ошибка валидации');
 

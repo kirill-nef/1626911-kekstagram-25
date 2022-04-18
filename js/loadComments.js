@@ -29,46 +29,14 @@ let fromComentsPreload = 0;
 let toComentsPreload = PRELOAD;
 
 // Функция установки начальных значений, вызывается при закрытии окна боьшой фотографии
-function setDefaultCommentsPreload () {
+const setDefaultCommentsPreload = () => {
   fromComentsPreload = 0;
   toComentsPreload = PRELOAD;
   checkComment = 0;
-}
-
-function loadComments() {
-  postComments(fromComentsPreload, toComentsPreload);
-}
-
-// Обработчик кнопки загруки комментариев
-commentsLoader.addEventListener('click', loadComments);
-
-// Включение/отключение счетчика фоток и кнопки загрузки комментариев
-function monitorCommentCounters (pictureIndex) {
-  // Получам данные о текущей картинке и заносим в переменные
-  currentIndex = pictureIndex;
-  // Получаем из массива нужный элемент и узнаем длину массива с комментами
-  const element = getActiveArrayDatum()[currentIndex];
-  countComments = element.comments.length;
-
-  if (countComments > PRELOAD) {
-    // Включаем показ счетчика
-    socialCommentCount.classList.remove('hidden');
-    commentsLoader.classList.remove('hidden');
-    // Подставляем число всех коментов в счетчик
-    сommentsСount.textContent = countComments;
-    // Вызов функции генерации комменатрия при начальном открытии окна
-    postComments(fromComentsPreload, toComentsPreload);
-  } else {
-    // Выключаем показ счетчика
-    socialCommentCount.classList.add('hidden');
-    commentsLoader.classList.add('hidden');
-    // Вызов функции генерации комменатрия при начальном открытии окна
-    postComments(fromComentsPreload, countComments);
-  }
-}
+};
 
 // Фукция публикации комментов из массива
-function postComments (fromIndex, toIndex) {
+const postComments = (fromIndex, toIndex) => {
   // Получаем массив комментов
   const element = getActiveArrayDatum()[currentIndex];
 
@@ -106,6 +74,38 @@ function postComments (fromIndex, toIndex) {
   if (fromComentsPreload === toComentsPreload) {
     commentsLoader.classList.add('hidden');
   }
-}
+};
+
+const loadComments = () => {
+  postComments(fromComentsPreload, toComentsPreload);
+};
+
+// Обработчик кнопки загруки комментариев
+commentsLoader.addEventListener('click', loadComments);
+
+// Включение/отключение счетчика фоток и кнопки загрузки комментариев
+const monitorCommentCounters = (pictureIndex) => {
+  // Получам данные о текущей картинке и заносим в переменные
+  currentIndex = pictureIndex;
+  // Получаем из массива нужный элемент и узнаем длину массива с комментами
+  const element = getActiveArrayDatum()[currentIndex];
+  countComments = element.comments.length;
+
+  if (countComments > PRELOAD) {
+    // Включаем показ счетчика
+    socialCommentCount.classList.remove('hidden');
+    commentsLoader.classList.remove('hidden');
+    // Подставляем число всех коментов в счетчик
+    сommentsСount.textContent = countComments;
+    // Вызов функции генерации комменатрия при начальном открытии окна
+    postComments(fromComentsPreload, toComentsPreload);
+  } else {
+    // Выключаем показ счетчика
+    socialCommentCount.classList.add('hidden');
+    commentsLoader.classList.add('hidden');
+    // Вызов функции генерации комменатрия при начальном открытии окна
+    postComments(fromComentsPreload, countComments);
+  }
+};
 
 export {monitorCommentCounters, setDefaultCommentsPreload, loadComments};

@@ -26,20 +26,11 @@ const scaleControl = document.querySelector('.scale__control--value');
 // Кнопки выбора эффекта
 const effectsRadio = document.querySelectorAll('.effects__radio');
 
-// Функция для закрытия окна с большой фотографией по нажатию Escape
-const onPopupEscapeKeydown = (evt) => {
-  if (isEscapeKey(evt) && evt.target !== fieldHashtags && evt.target !== fieldComment) {
-    evt.preventDefault();
-    closePopupUpload();
-  }
-};
-
 // Удаление обработчика функции закрытия по Escape
-function closePopupUpload () {
+const closePopupUpload = () => {
   closeSlider();
   imgUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onPopupEscapeKeydown);
   imgUploadInput.value = '';
   scaleControl.value = '100';
   textHashtags.value = '';
@@ -49,7 +40,16 @@ function closePopupUpload () {
   effectsRadio[0].checked = true;
   uploadImg.style = null;
   uploadImg.src = '';
-}
+};
+
+// Функция для закрытия окна с большой фотографией по нажатию Escape
+const onPopupEscapeKeydown = (evt) => {
+  if (isEscapeKey(evt) && evt.target !== fieldHashtags && evt.target !== fieldComment) {
+    evt.preventDefault();
+    closePopupUpload();
+    document.removeEventListener('keydown', onPopupEscapeKeydown);
+  }
+};
 
 // Функция закрытия окна выгрузки по крестику
 cancellButtonUpload.addEventListener('click', () => {

@@ -12,47 +12,40 @@ const bigPictureLikes = bigPictureBlock.querySelector('.likes-count');
 const bigPictureDescription = bigPictureBlock.querySelector('.social__caption');
 // Поиск поля ввода комментариев
 const fieldComments = document.querySelector('.social__footer-text');
-
 // Поиск кнопки закрытия в блоке большой фотографии
 const cancellButtonPicture = document.getElementById('picture-cancel');
 
-// Закрытие окна с большой фотографией по клику на крестик
-cancellButtonPicture.addEventListener('click', () => {
-  closePopupPicture();
-});
+// Функция очистки данных у окна с большой фотографией
+const clearDataBigPicture = () => {
+  // Очистка комментариев под фото
+  const bigPictureCommentsItem = bigPictureBlock.querySelectorAll('.social__comment');
+  for (let j = 0; j < bigPictureCommentsItem.length; j++) {
+    bigPictureCommentsItem[j].remove();
+  }
+  bigPictureLikes.textContent = '';
+  bigPicture.src = '';
+  bigPicture.alt = 'Фотография пользователя';
+  bigPictureDescription.textContent = '';
+};
+
+// Закрытие и удаление обработчика закрывания
+const closePopupPicture = () => {
+  bigPictureBlock.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  clearDataBigPicture();
+  setDefaultCommentsPreload();
+};
 
 // Функция для закрытия окна с большой фотографией по нажатию Escape
 const onPopupEscapeKeydown = (evt) => {
   if (isEscapeKey(evt) && evt.target !== fieldComments) {
     closePopupPicture();
+    document.removeEventListener('keydown', onPopupEscapeKeydown);
   }
 };
 
-// Закрытие и удаление обработчика закрывания
-function closePopupPicture () {
-  bigPictureBlock.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onPopupEscapeKeydown);
-  clearDataBigPicture();
-
-  // Функция очистки данных у окна с большой фотографией
-  function clearDataBigPicture () {
-    // Очистка комментариев под фото
-    const bigPictureCommentsItem = bigPictureBlock.querySelectorAll('.social__comment');
-    for (let j = 0; j < bigPictureCommentsItem.length; j++) {
-      bigPictureCommentsItem[j].remove();
-    }
-    bigPictureLikes.textContent = '';
-    bigPicture.src = '';
-    bigPicture.alt = 'Фотография пользователя';
-    bigPictureDescription.textContent = '';
-  }
-
-  setDefaultCommentsPreload();
-}
-
 // Функция открытия большой фотографии вызывается при клике из функции renderingTh....
-function openBigPicture (index) {
+const openBigPicture = (index) => {
   const element = getActiveArrayDatum()[index];
   // Меняем ссылку картинки
   bigPicture.src = `${element.url}`;
@@ -68,6 +61,12 @@ function openBigPicture (index) {
   monitorCommentCounters(index);
   // Подключение функции закрытия большого окна по нажатию Escape
   document.addEventListener('keydown', onPopupEscapeKeydown);
-}
+};
+
+// Закрытие окна с большой фотографией по клику на крестик
+cancellButtonPicture.addEventListener('click', () => {
+  closePopupPicture();
+  document.removeEventListener('click', cancellButtonPicture);
+});
 
 export {openBigPicture};

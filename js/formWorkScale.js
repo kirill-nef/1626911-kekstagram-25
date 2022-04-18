@@ -15,6 +15,11 @@ const MAX_VALUE = 100;
 // Хранимое значение
 let scaleValue = scaleControl.value;
 
+// Функция привязки значения на картинку
+const applySizeImg = () => {
+  uploadImg.style.transform = `scale(${  scaleControl.value / 100  })`;
+};
+
 // Кнопка мин
 buttonScaleSmaller.addEventListener('click', () => {
   scaleValue = Number(scaleValue) - Number(STEP_VALUE);
@@ -34,8 +39,3 @@ buttonScaleBigger.addEventListener('click', () => {
   scaleControl.value = scaleValue;
   applySizeImg();
 });
-
-// Функция привязки значения на картинку
-function applySizeImg () {
-  uploadImg.style.transform = `scale(${  scaleControl.value / 100  })`;
-}

@@ -1,6 +1,6 @@
 // Модуль в котором хранятся настройки эффектов для фотографии
 
-const effectConfig = {
+const EffectConfig = {
   chrome: {
     effectProperty: 'grayscale',
     unit: '',
@@ -63,4 +63,4 @@ const effectConfig = {
   }
 };
 
-export {effectConfig};
+export {EffectConfig};
