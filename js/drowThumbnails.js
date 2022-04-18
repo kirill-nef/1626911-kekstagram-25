@@ -9,7 +9,7 @@ const templatePicture = document.querySelector('#picture').content;
 const templatePictureItem = templatePicture.querySelector('.picture');
 
 // Функция отрисовки миниатюр на странице
-const drow = function (img, comments, likes, index) {
+const drow = (img, comments, likes, index) => {
   // Делаем полный клон блока
   const taskPicture = templatePictureItem.cloneNode(true);
   // Задаем src для картинки
