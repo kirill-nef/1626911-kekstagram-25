@@ -56,14 +56,14 @@ cancellButtonUpload.addEventListener('click', () => {
   closePopupUpload();
 });
 
-// Открытие окна выгрузки при изменении инпута
-imgUploadInput.onchange = function() {
+// При изменении инпута открывать окно формы
+imgUploadInput.addEventListener('change', () => {
   imgUpload.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
   // Подключение функции закрытия большого окна по нажатию Escape
   document.addEventListener('keydown', onPopupEscapeKeydown);
-};
+});
 
-// Активация функции отправки формы
+// Активация функции валидации, после которой пойдет отправка формы
 setUserForSubmit(closePopupUpload);

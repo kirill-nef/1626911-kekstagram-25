@@ -1,3 +1,21 @@
+// Импорт функции закрытия окна по escape
+import {isEscapeKey} from './util.js';
+
+let activeWindow;
+
+const closeActiveWindow = () => {
+  activeWindow.remove();
+  activeWindow = '';
+};
+
+const msgEscapeKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    closeActiveWindow();
+    document.removeEventListener('keydown', msgEscapeKeydown);
+  }
+};
+
+
 function showFormSuccess () {
   // Поиск template
   const templateSucsess = document.querySelector('#success').content;
@@ -8,12 +26,17 @@ function showFormSuccess () {
   // Пушим на страницу
   document.body.appendChild(successClone);
 
+  const success = document.querySelector('.success');
+  activeWindow = success;
+
   const successButton = document.querySelector('.success__button');
   successButton.addEventListener('click', () => {
-    const success = document.querySelector('.success');
-    success.remove();
+    closeActiveWindow();
     document.removeEventListener('click', successButton);
   });
+
+  // Подключение функции закрытия большого окна по нажатию Escape
+  document.addEventListener('keydown', msgEscapeKeydown);
 }
 
 function showFormError () {
@@ -28,13 +51,19 @@ function showFormError () {
   // Пушим на страницу
   document.body.appendChild(errorClone);
 
+  const error = document.querySelector('.error');
+  activeWindow = error;
+
   const errorButton = document.querySelector('.error__button');
   errorButton.addEventListener('click', () => {
     imgUploadButton.click();
-    const error = document.querySelector('.error');
-    error.remove();
+    closeActiveWindow();
     document.removeEventListener('click', errorButton);
   });
+
+  // Подключение функции закрытия большого окна по нажатию Escape
+  document.addEventListener('keydown', msgEscapeKeydown);
+
 }
 
 

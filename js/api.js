@@ -1,5 +1,8 @@
+const URL_GET = 'https://25.javascript.pages.academy/kekstagram/data';
+const URL_SEND = 'https://25.javascript.pages.academy/kekstagram';
+
 // Получем данные с сервера
-const getData = () =>  fetch('https://25.javascript.pages.academy/kekstagram/data')
+const getData = () =>  fetch(URL_GET)
   .then((respone) => respone.json())
   .then((photoData) => photoData)
   .catch(() => false);
@@ -7,7 +10,7 @@ const getData = () =>  fetch('https://25.javascript.pages.academy/kekstagram/dat
 // Отправляем данные на сервер
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://25.javascript.pages.academy/kekstagram',
+    URL_SEND,
     {
       method: 'POST',
       body,
@@ -18,7 +21,7 @@ const sendData = (onSuccess, onFail, body) => {
         onSuccess();
       }
       else {
-        onSuccess();
+        onFail();
       }
     })
     .catch(() => {

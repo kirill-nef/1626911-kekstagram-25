@@ -7,15 +7,15 @@ import {debounce} from './util.js';
 
 // Активный массив
 let activeArrayDatum;
-const DELEY = 300;
+const DELEY = 500;
 // Функция для экспорта масиива
 const getActiveArrayDatum = () => activeArrayDatum;
 
 // Функция сортироки
 function getSorting () {
   // Первоначальная публикация, по умолчанию
-  drowThumbnails(getOriginalArrayDatum());
   activeArrayDatum = getOriginalArrayDatum();
+  drowThumbnails(activeArrayDatum);
   clickThumbnails();
 
   // Блок фильтров

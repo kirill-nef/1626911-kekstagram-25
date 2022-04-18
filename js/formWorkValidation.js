@@ -38,7 +38,7 @@ const unblockSubmitButton = () => {
 };
 
 // При успешной валидации, отправляется форма через fetch(sendData)
-const setUserForSubmit = (onSuccess) => {
+const setUserForSubmit = (closePopupUpload) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
@@ -46,7 +46,7 @@ const setUserForSubmit = (onSuccess) => {
       blockSubmitButton();
       sendData(
         () => {
-          onSuccess();
+          closePopupUpload();
           showFormSuccess('Фотография успешно отправлена!');
           unblockSubmitButton();
         },
@@ -71,16 +71,13 @@ function validateHashTags(value) {
     hashTagsValidText.textContent = 'Хэш-тегов не может быть более 5';
     return false;
   }
-  else {
-    hashTagsValidText.textContent = '';
-    if (uniqArrHashTags.size < arrHashTags.length) {
-      hashTagsValidText.textContent = 'Не должно быть повторяющихся Хэштегов';
-      return false;
-    }
-    else {
-      hashTagsValidText.textContent = '';
-    }
+
+  hashTagsValidText.textContent = '';
+  if (uniqArrHashTags.size < arrHashTags.length) {
+    hashTagsValidText.textContent = 'Не должно быть повторяющихся Хэштегов';
+    return false;
   }
+
 
   // Валидация хэштега на правильность ввода
   const re = new RegExp('^#[A-Za-zА-Яа-яЁё0-9]{1,20}$');
@@ -90,19 +87,15 @@ function validateHashTags(value) {
       const hashCheck = re.test(curentHashtag);
       if (hashCheck === false) {
         hashTagsValidText.textContent = 'Хэш-тег имеет ошибку или длину более 20 символов';
-        if (curentHashtag === '' || curentHashtag === '#') {
-          hashTagsValidText.textContent = 'Введите #ХэшТег';
-        }
+        return false;
+      } else if (curentHashtag === '' || curentHashtag === '#') {
+        hashTagsValidText.textContent = 'Введите #ХэшТег';
         return false;
       }
-      else {
-        hashTagsValidText.textContent = '';
-      }
-    } else {
-      hashTagsValidText.textContent = '';
-      return true;
     }
   }
+
+  hashTagsValidText.textContent = '';
   return true;
 }
 

@@ -29,14 +29,14 @@ const drow = function (img, comments, likes, index) {
 
 // Функция создания миниатюр вызывается из photoArrayDatum при успешной загрузки данных с сервера
 function drowThumbnails (photoArrayDatum) {
-  const THUMBNAILS = photoArrayDatum.length;
+  const thumbnails = photoArrayDatum.length;
 
   // Цикл для парсинга массива photoArrayDatum
-  for (let i = 0; i < THUMBNAILS; i++) {
-    const IMG = photoArrayDatum[i].url;
-    const COMMENTS = photoArrayDatum[i].comments.length;
-    const LIKES = photoArrayDatum[i].likes;
-    drow(IMG, COMMENTS, LIKES, i);
+  for (let i = 0; i < thumbnails; i++) {
+    const img = photoArrayDatum[i].url;
+    const comments = photoArrayDatum[i].comments.length;
+    const likes = photoArrayDatum[i].likes;
+    drow(img, comments, likes, i);
   }
 }
 

@@ -1,9 +1,6 @@
 // Проверка на нажатие кнопки Escape, возвращает true/false
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-// export {getRandomPositiveInteger, isEscapeKey};
-export {isEscapeKey};
-
 // Функция вывода сообщения с ошибкой на экран
 const showAlert = (message, time) => {
   const alertContainer = document.createElement('div');
@@ -33,4 +30,4 @@ function debounce (callback, timeoutDelay) {
   };
 }
 
-export {showAlert, debounce};
+export {isEscapeKey, showAlert, debounce};
