@@ -18,7 +18,6 @@ const msgEscapeKeydown = (evt) => {
   }
 };
 
-
 const showFormSuccess = () => {
   // Поиск template
   const templateSucsess = document.querySelector('#success').content;

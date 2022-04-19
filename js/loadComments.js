@@ -1,11 +1,7 @@
 import { getActiveArrayDatum } from './sorting.js';
 
-// Текущий индекс фотографии
-let currentIndex = '';
-// Общее количество комментариев у текущей фотографии
-let countComments = '';
-// Контроль за выгруженными комментариями
-let checkComment = '';
+// Количество первоначально загруженных комментов
+const PRELOAD = 5;
 
 // Поиск блока с большой фотографией
 const bigPictureSocial = document.querySelector('.big-picture__social');
@@ -16,13 +12,18 @@ const сommentsСountCurrent = bigPictureSocial.querySelector('.comments-count-c
 const commentsList = document.querySelector('.social__comments');
 // Поиск в template блок comments
 const commentsItem = document.querySelector('#comments').content.querySelector('.social__comment');
-// Количество первоначально загруженных комментов
-const PRELOAD = 5;
 
 // Поиск блока с указанием числа комментариев
 const socialCommentCount = bigPictureSocial.querySelector('.social__comment-count');
 // Поиск кнопки Загрузить еще
 const commentsLoader = bigPictureSocial.querySelector('.comments-loader');
+
+// Текущий индекс фотографии
+let currentIndex = '';
+// Общее количество комментариев у текущей фотографии
+let countComments = '';
+// Контроль за выгруженными комментариями
+let checkComment = '';
 
 // Индекс начального и конечного числа загрузки комментария
 let fromComentsPreload = 0;
@@ -65,12 +66,8 @@ const postComments = (fromIndex, toIndex) => {
   fromComentsPreload = toComentsPreload;
 
   // Условие, чтобы было невозможно запросить несуществующие комментарии
-  if (countComments > checkComment) {
-    toComentsPreload = toComentsPreload + PRELOAD;
-  }
-  else {
-    toComentsPreload = countComments;
-  }
+  toComentsPreload = (countComments > checkComment) ? toComentsPreload = toComentsPreload + PRELOAD : toComentsPreload = countComments;
+
   if (fromComentsPreload === toComentsPreload) {
     commentsLoader.classList.add('hidden');
   }

@@ -7,6 +7,9 @@ import  {closeSlider} from './formWorkSlider.js';
 // Поля вывода ошибок по инпутам
 import  {fieldComment, fieldHashtags, setUserForSubmit} from './formWorkValidation.js';
 
+// Значение слайдера по умолчанию
+const DEFAUL_VALUE_SCALE = 100;
+
 // Поиск окна выгрузки
 const imgUpload = document.querySelector('.img-upload__overlay');
 // Поиск кнопки закрытия окна выгрузки
@@ -32,7 +35,7 @@ const closePopupUpload = () => {
   imgUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
   imgUploadInput.value = '';
-  scaleControl.value = '100';
+  scaleControl.value = DEFAUL_VALUE_SCALE;
   textHashtags.value = '';
   textDescription.value = '';
   hashTagsValidText.textContent = '';

@@ -10,9 +10,12 @@ import { showAlert } from './util.js';
 import { getSorting } from './sorting.js';
 // Модуль публикации фото из инпута
 import './publicationPhoto.js';
+
+// Отображение окна, если загрузка с сервера не удалась
+const SHOW_ALERT_DELEY = 16000;
+
 // Массив данных, подгружается из getData с  сервера
 let arrayDatum;
-
 
 // Массив для импорта
 const getOriginalArrayDatum = () => arrayDatum;
@@ -23,7 +26,7 @@ getData().then((data) => {
 })
   .then(() => {
     if (arrayDatum === false) {
-      showAlert('Не удалось загрузить данные с сервера, попробуйте обновить зайти позднее!', 16000);
+      showAlert('Не удалось загрузить данные с сервера, попробуйте обновить зайти позднее!', SHOW_ALERT_DELEY);
     }
     else {
       getSorting();

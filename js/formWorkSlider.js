@@ -10,6 +10,7 @@ const valueElement = document.querySelector('.effect-level__value');
 const effectsList = document.querySelector('.effects__list');
 // Поиск фотографии
 const imgUploadPreview = document.querySelector('.img-upload__preview img');
+
 // Выбранное value фильтра из radio кнопки
 let chekedValue;
 // CSS название эффекта
@@ -21,17 +22,6 @@ const closeSlider = () => {
   imgUploadPreview.style.filter = 'none';
   boxSlider.classList.add('hidden');
 };
-
-// Создание слайдера
-noUiSlider.create(sliderElement, {
-  range: {
-    min: 0,
-    max: 100,
-  },
-  start: 100,
-  step: 1,
-  connect: 'lower',
-});
 
 // Функция применяющая эффект на фотографию. Вызывается при работе слайдера.
 const setEffect = () => {
@@ -52,6 +42,17 @@ const settingSlider = () => {
     sliderElement.noUiSlider.updateOptions(effect.sliderConfig);
   }
 };
+
+// Создание слайдера
+noUiSlider.create(sliderElement, {
+  range: {
+    min: 0,
+    max: 100,
+  },
+  start: 100,
+  step: 1,
+  connect: 'lower',
+});
 
 // Слежение за изменением слайдера
 sliderElement.noUiSlider.on('update', () => {

@@ -5,6 +5,13 @@ import {showAlert} from './util.js';
 // Функция отправки формы
 import {sendData} from './api.js';
 
+// Задержка для отображения окна о неуспешной валидации
+const TIME_DELEY = 6000;
+// Максимальное число хэштегов
+const MAX_HASHTAGS = 5;
+// Минимальное число хэштегов (число при котором валидация будет отключена)
+const MIN_HASHTAGS = 0;
+
 // Поиск формы
 const uploadForm = document.querySelector('.img-upload__form');
 // В форме поиск окна ввода с хэш-тегом и комментом
@@ -58,7 +65,7 @@ const setUserForSubmit = (closePopupUpload) => {
       );
     }
     else {
-      showAlert('Проверьте правильность введенных данных!', 6000);
+      showAlert('Проверьте правильность введенных данных!', TIME_DELEY);
     }
   });
 };
@@ -67,7 +74,7 @@ const setUserForSubmit = (closePopupUpload) => {
 const validateHashTags = (value) => {
   const arrHashTags = value.toLowerCase().split(' ');
   const uniqArrHashTags = new Set(arrHashTags);
-  if (arrHashTags.length > 5) {
+  if (arrHashTags.length > MAX_HASHTAGS) {
     hashTagsValidText.textContent = 'Хэш-тегов не может быть более 5';
     return false;
   }
@@ -81,7 +88,7 @@ const validateHashTags = (value) => {
   // Валидация хэштега на правильность ввода
   const re = new RegExp('^#[A-Za-zА-Яа-яЁё0-9]{1,20}$');
   for (let i = 0; i < arrHashTags.length; i++) {
-    if (fieldHashtags.value.length > 0) {
+    if (fieldHashtags.value.length > MIN_HASHTAGS) {
       const curentHashtag = arrHashTags[i];
       const hashCheck = re.test(curentHashtag);
       if (hashCheck === false) {

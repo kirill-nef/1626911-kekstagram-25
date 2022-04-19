@@ -18,10 +18,8 @@ const cancellButtonPicture = document.getElementById('picture-cancel');
 // Функция очистки данных у окна с большой фотографией
 const clearDataBigPicture = () => {
   // Очистка комментариев под фото
-  const bigPictureCommentsItem = bigPictureBlock.querySelectorAll('.social__comment');
-  for (let j = 0; j < bigPictureCommentsItem.length; j++) {
-    bigPictureCommentsItem[j].remove();
-  }
+  bigPictureBlock.querySelector('.social__comments').innerHTML = '';
+
   bigPictureLikes.textContent = '';
   bigPicture.src = '';
   bigPicture.alt = 'Фотография пользователя';

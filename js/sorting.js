@@ -5,6 +5,9 @@ import { getOriginalArrayDatum } from './main.js';
 // функция debounce
 import {debounce} from './util.js';
 
+// Задержка перед отработкой функции (дребезг)
+const DELEY = 500;
+
 //Кнопка по умолчанию
 const buttonDefault = document.getElementById('filter-default');
 // Кнопка случайные
@@ -16,7 +19,7 @@ const imgFilters =  document.querySelector('.img-filters');
 
 // Активный массив
 let activeArrayDatum;
-const DELEY = 500;
+
 // Функция для экспорта масиива
 const getActiveArrayDatum = () => activeArrayDatum;
 
